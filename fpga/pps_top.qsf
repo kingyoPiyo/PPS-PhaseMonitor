@@ -122,6 +122,7 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PANEL_LED[3]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PANEL_LED
 set_location_assignment PIN_C8 -to UART_RX
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to UART_RX
+set_global_assignment -name VERILOG_FILE rtl/freq_counter.v
 set_global_assignment -name VERILOG_FILE rtl/ans_proc.v
 set_global_assignment -name VERILOG_FILE rtl/uart_tx.v
 set_global_assignment -name VERILOG_FILE rtl/pps_gen.v

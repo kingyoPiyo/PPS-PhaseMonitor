@@ -115,7 +115,7 @@ module phase_meas (
             r_dly_st_50m <= 1'b0;
         end else if (r_dly_cnt_50m[25:0] != 26'h3FFFFFF) begin
             r_dly_cnt_50m[25:0] <= r_dly_cnt_50m[25:0] + 26'd1;
-            r_dly_st_50m <= (r_dly_cnt_50m[25:0] == 26'd50000);     // 遅延量を設定
+            r_dly_st_50m <= (r_dly_cnt_50m[25:0] == 26'd5000000);   // 遅延量を設定,約100ms
         end
     end
 

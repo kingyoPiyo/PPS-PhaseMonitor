@@ -152,8 +152,12 @@ set_false_path -to [get_ports {PANEL_LED[*]}]
 set_false_path -to [get_ports {ONB_LED[*]}]
 
 # w_clk400m -> w_clk50m
+# phase_meas.v
 set_false_path -from [get_clocks {w_clk400m}] -to [get_clocks {w_clk50m}]
 
+# w_ref100m -> w_clk50m
+# freq_counter.v
+set_false_path -from [get_clocks {w_ref100m}] -to [get_clocks {w_clk50m}]
 
 #**************************************************************
 # Set Multicycle Path

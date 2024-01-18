@@ -37,6 +37,7 @@ module pps_top (
     (* syn_keep=1 *) wire    [28:0]  w_ph2;
     (* syn_keep=1 *) wire    [28:0]  w_ph3;
     (* syn_keep=1 *) wire    [28:0]  w_ph4;
+    (* syn_keep=1 *) wire    [27:0]  w_freq;
 
 
     // Clock generator from Onboard OSC
@@ -77,6 +78,17 @@ module pps_top (
     );
 
 
+    // Frequency counter
+    //  - Target : REF_CLK
+    //  - Gate   : PPS1
+    freq_counter freq_counter_inst (
+        .i_clk ( w_ref100m ),   // Ref 100MHz
+        .i_res_n ( RST_N ),
+        .i_pps ( PPS1 ),        // 1PPS signal from GPS
+        .o_freq ( w_freq[27:0] )
+    );
+
+
     // UART TX
     ans_proc ans_proc_inst (
         .i_clk ( w_clk50m ),
@@ -85,6 +97,7 @@ module pps_top (
         .i_ph2 ( w_ph2[28:0] ),
         .i_ph3 ( w_ph3[28:0] ),
         .i_ph4 ( w_ph4[28:0] ),
+        .i_freq ( w_freq[27:0] ),
         .i_tx_start ( w_ph_en ),
         .o_uart_tx ( UART_TX )
     );

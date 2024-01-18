@@ -5,6 +5,7 @@ module ans_proc (
     input   wire    [28:0]  i_ph2,
     input   wire    [28:0]  i_ph3,
     input   wire    [28:0]  i_ph4,
+    input   wire    [27:0]  i_freq,
     input   wire            i_tx_start,
     output  wire            o_uart_tx
     );
@@ -15,17 +16,20 @@ module ans_proc (
     reg     [28:0]  r_ph2;
     reg     [28:0]  r_ph3;
     reg     [28:0]  r_ph4;
+    reg     [27:0]  r_freq;
     always @(posedge i_clk or negedge i_rst_n) begin
         if (~i_rst_n) begin
             r_ph1[28:0] <= 29'd0;
             r_ph2[28:0] <= 29'd0;
             r_ph3[28:0] <= 29'd0;
             r_ph4[28:0] <= 29'd0;
+            r_freq[27:0] <= 28'd0;
         end else if (i_tx_start) begin
             r_ph1[28:0] <= i_ph1[28:0];
             r_ph2[28:0] <= i_ph2[28:0];
             r_ph3[28:0] <= i_ph3[28:0];
             r_ph4[28:0] <= i_ph4[28:0];
+            r_freq[27:0] <= i_freq[27:0];
         end
     end
 
@@ -47,7 +51,7 @@ module ans_proc (
             r_write_byte_cnt[7:0] <= r_write_byte_cnt[7:0] + 8'd1;
             r_uart_tx_en <= 1'b0;
 
-            if (r_write_byte_cnt[7:0] == 8'd37) begin   // End
+            if (r_write_byte_cnt[7:0] == 8'd45) begin   // End
                 r_write_byte_cnt[7:0] <= 8'd0;
                 r_uart_tx_busy <= 1'b0;
             end
@@ -119,8 +123,18 @@ module ans_proc (
                                      (r_write_byte_cnt[7:0] == 8'd32) ? getHexStr(r_ph4[11:8]) :
                                      (r_write_byte_cnt[7:0] == 8'd33) ? getHexStr(r_ph4[7:4]) :
                                      (r_write_byte_cnt[7:0] == 8'd34) ? getHexStr(r_ph4[3:0]) :
-                                     (r_write_byte_cnt[7:0] == 8'd35) ? 8'h0d :    // CR "\r"
-                                     (r_write_byte_cnt[7:0] == 8'd36) ? 8'h0a :    // LF "\n"
+                                     (r_write_byte_cnt[7:0] == 8'd35) ? 8'h2c :   // ,
+
+                                     (r_write_byte_cnt[7:0] == 8'd36) ? getHexStr(r_freq[27:24]) :
+                                     (r_write_byte_cnt[7:0] == 8'd37) ? getHexStr(r_freq[23:20]) :
+                                     (r_write_byte_cnt[7:0] == 8'd38) ? getHexStr(r_freq[19:16]) :
+                                     (r_write_byte_cnt[7:0] == 8'd39) ? getHexStr(r_freq[15:12]) :
+                                     (r_write_byte_cnt[7:0] == 8'd40) ? getHexStr(r_freq[11:8]) :
+                                     (r_write_byte_cnt[7:0] == 8'd41) ? getHexStr(r_freq[7:4]) :
+                                     (r_write_byte_cnt[7:0] == 8'd42) ? getHexStr(r_freq[3:0]) :
+
+                                     (r_write_byte_cnt[7:0] == 8'd43) ? 8'h0d :    // CR "\r"
+                                     (r_write_byte_cnt[7:0] == 8'd44) ? 8'h0a :    // LF "\n"
                                      8'd0;
 
 
