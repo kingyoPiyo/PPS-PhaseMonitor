@@ -25,7 +25,8 @@ module pps_top (
 
 
     // Wire
-    wire    w_clk400m;
+    wire    w_clk500m;
+    wire    w_clk250m;
     wire    w_clk100m;
     wire    w_clk50m;
     wire    w_pll_locked;
@@ -33,20 +34,22 @@ module pps_top (
     wire    w_ref100m;
     wire    w_refpll_locked;
     wire    w_ph_en;
-    (* syn_keep=1 *) wire    [28:0]  w_ph1;
-    (* syn_keep=1 *) wire    [28:0]  w_ph2;
-    (* syn_keep=1 *) wire    [28:0]  w_ph3;
-    (* syn_keep=1 *) wire    [28:0]  w_ph4;
+    (* syn_keep=1 *) wire    [29:0]  w_ph1;
+    (* syn_keep=1 *) wire    [29:0]  w_ph2;
+    (* syn_keep=1 *) wire    [29:0]  w_ph3;
+    (* syn_keep=1 *) wire    [29:0]  w_ph4;
     (* syn_keep=1 *) wire    [27:0]  w_freq;
+    wire    w_pps4_sel;
 
 
     // Clock generator from Onboard OSC
     pll	pll_inst (
         .areset ( ~RST_N ),
         .inclk0 ( MCO ),        // 50MHz
-        .c0 ( w_clk400m ),      // 400MHz
+        .c0 ( w_clk500m ),      // 500MHz
         .c1 ( w_clk100m ),      // 100MHz
         .c2 ( w_clk50m ),       // 50MHz
+        .c3 ( w_clk250m ),      // 250MHz
         .locked ( w_pll_locked )
 	);
 
@@ -60,21 +63,24 @@ module pps_top (
         .locked ( w_refpll_locked )
 	);
 
-
+    
     // Phase measurement
+    assign w_pps4_sel = USER_DIPSW[0] ? PPS4 : PPSO1;
     phase_meas phase_meas_inst (
         .i_res_n ( RST_N ),
-        .i_clk ( w_clk400m ),
-        .i_clk2 ( w_clk50m ),
+        .i_fclk ( w_clk500m ),  // DDR Sampling clock
+        .i_pclk ( w_clk250m ),  // Parallel clock
+        .i_lclk ( w_clk50m ),   // Output clock
         .i_pps1 ( PPS1 ),
         .i_pps2 ( PPS2 ),
         .i_pps3 ( PPS3 ),
-        .i_pps4 ( PPS4 ),
+        //.i_pps4 ( PPS4 ),
+        .i_pps4 ( w_pps4_sel ),
         .o_ph_en ( w_ph_en ),   // ** 50MHz **
-        .o_ph1 ( w_ph1[28:0] ), // ** 50MHz **
-        .o_ph2 ( w_ph2[28:0] ), // ** 50MHz **
-        .o_ph3 ( w_ph3[28:0] ), // ** 50MHz **
-        .o_ph4 ( w_ph4[28:0] )  // ** 50MHz **
+        .o_ph1 ( w_ph1[29:0] ), // ** 50MHz **
+        .o_ph2 ( w_ph2[29:0] ), // ** 50MHz **
+        .o_ph3 ( w_ph3[29:0] ), // ** 50MHz **
+        .o_ph4 ( w_ph4[29:0] )  // ** 50MHz **
     );
 
 
@@ -93,10 +99,10 @@ module pps_top (
     ans_proc ans_proc_inst (
         .i_clk ( w_clk50m ),
         .i_rst_n ( RST_N ),
-        .i_ph1 ( w_ph1[28:0] ),
-        .i_ph2 ( w_ph2[28:0] ),
-        .i_ph3 ( w_ph3[28:0] ),
-        .i_ph4 ( w_ph4[28:0] ),
+        .i_ph1 ( w_ph1[29:0] ),
+        .i_ph2 ( w_ph2[29:0] ),
+        .i_ph3 ( w_ph3[29:0] ),
+        .i_ph4 ( w_ph4[29:0] ),
         .i_freq ( w_freq[27:0] ),
         .i_tx_start ( w_ph_en ),
         .o_uart_tx ( UART_TX )
@@ -116,12 +122,12 @@ module pps_top (
     assign ONB_LED[0] = ~PPS1;
     assign ONB_LED[1] = ~PPS2;
     assign ONB_LED[2] = ~PPS3;
-    assign ONB_LED[3] = ~PPS4;
+    assign ONB_LED[3] = ~w_pps4_sel;
     assign ONB_LED[4] = ~w_refpll_locked;
     assign PANEL_LED[0] = PPS1;
     assign PANEL_LED[1] = PPS2;
     assign PANEL_LED[2] = PPS3;
-    //assign PANEL_LED[3] = PPS4;
-    assign PANEL_LED[3] = PPSO1;
+    assign PANEL_LED[3] = w_pps4_sel;
+    //assign PANEL_LED[3] = PPSO1;
 
 endmodule

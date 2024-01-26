@@ -49,9 +49,11 @@ create_clock -name {REF_CLK} -period 200.000 -waveform { 0.000 100.000 } [get_po
 #**************************************************************
 
 create_generated_clock -name {w_ref100m} -source [get_pins {pll_ref_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 20 -master_clock {REF_CLK} [get_pins {pll_ref_inst|altpll_component|auto_generated|pll1|clk[1]}] 
-create_generated_clock -name {w_clk400m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 8 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] 
+create_generated_clock -name {w_clk500m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 10 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] 
 create_generated_clock -name {w_clk100m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 2 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[1]}] 
 create_generated_clock -name {w_clk50m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 1 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[2]}] 
+create_generated_clock -name {w_clk250m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 5 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[3]}] 
+
 
 #**************************************************************
 # Set Clock Latency
@@ -83,14 +85,14 @@ set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -rise_to [get_clocks {
 set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_clk100m}] -hold 0.150  
 set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_clk100m}] -setup 0.160  
 set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_clk100m}] -hold 0.150  
-set_clock_uncertainty -rise_from [get_clocks {w_clk400m}] -rise_to [get_clocks {w_clk400m}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {w_clk400m}] -fall_to [get_clocks {w_clk400m}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {w_clk400m}] -rise_to [get_clocks {w_clk50m}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {w_clk400m}] -fall_to [get_clocks {w_clk50m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk400m}] -rise_to [get_clocks {w_clk400m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk400m}] -fall_to [get_clocks {w_clk400m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk400m}] -rise_to [get_clocks {w_clk50m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk400m}] -fall_to [get_clocks {w_clk50m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk500m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk500m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk50m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk50m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk500m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk500m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk50m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk50m}]  0.020  
 set_clock_uncertainty -rise_from [get_clocks {w_clk100m}] -rise_to [get_clocks {w_ref100m}] -setup 0.150  
 set_clock_uncertainty -rise_from [get_clocks {w_clk100m}] -rise_to [get_clocks {w_ref100m}] -hold 0.160  
 set_clock_uncertainty -rise_from [get_clocks {w_clk100m}] -fall_to [get_clocks {w_ref100m}] -setup 0.150  
@@ -151,9 +153,9 @@ set_false_path -from [get_ports {UART_RX}]
 set_false_path -to [get_ports {PANEL_LED[*]}]
 set_false_path -to [get_ports {ONB_LED[*]}]
 
-# w_clk400m -> w_clk50m
+# w_clk250m -> w_clk50m
 # phase_meas.v
-set_false_path -from [get_clocks {w_clk400m}] -to [get_clocks {w_clk50m}]
+set_false_path -from [get_clocks {w_clk250m}] -to [get_clocks {w_clk50m}]
 
 # w_ref100m -> w_clk50m
 # freq_counter.v

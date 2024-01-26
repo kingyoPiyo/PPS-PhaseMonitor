@@ -1,10 +1,10 @@
 module ans_proc (
     input   wire            i_clk,
     input   wire            i_rst_n,
-    input   wire    [28:0]  i_ph1,
-    input   wire    [28:0]  i_ph2,
-    input   wire    [28:0]  i_ph3,
-    input   wire    [28:0]  i_ph4,
+    input   wire    [29:0]  i_ph1,
+    input   wire    [29:0]  i_ph2,
+    input   wire    [29:0]  i_ph3,
+    input   wire    [29:0]  i_ph4,
     input   wire    [27:0]  i_freq,
     input   wire            i_tx_start,
     output  wire            o_uart_tx
@@ -12,23 +12,23 @@ module ans_proc (
 
 
     // Data Sampling
-    reg     [28:0]  r_ph1;
-    reg     [28:0]  r_ph2;
-    reg     [28:0]  r_ph3;
-    reg     [28:0]  r_ph4;
+    reg     [29:0]  r_ph1;
+    reg     [29:0]  r_ph2;
+    reg     [29:0]  r_ph3;
+    reg     [29:0]  r_ph4;
     reg     [27:0]  r_freq;
     always @(posedge i_clk or negedge i_rst_n) begin
         if (~i_rst_n) begin
-            r_ph1[28:0] <= 29'd0;
-            r_ph2[28:0] <= 29'd0;
-            r_ph3[28:0] <= 29'd0;
-            r_ph4[28:0] <= 29'd0;
+            r_ph1[29:0] <= 30'd0;
+            r_ph2[29:0] <= 30'd0;
+            r_ph3[29:0] <= 30'd0;
+            r_ph4[29:0] <= 30'd0;
             r_freq[27:0] <= 28'd0;
         end else if (i_tx_start) begin
-            r_ph1[28:0] <= i_ph1[28:0];
-            r_ph2[28:0] <= i_ph2[28:0];
-            r_ph3[28:0] <= i_ph3[28:0];
-            r_ph4[28:0] <= i_ph4[28:0];
+            r_ph1[29:0] <= i_ph1[29:0];
+            r_ph2[29:0] <= i_ph2[29:0];
+            r_ph3[29:0] <= i_ph3[29:0];
+            r_ph4[29:0] <= i_ph4[29:0];
             r_freq[27:0] <= i_freq[27:0];
         end
     end
@@ -51,7 +51,7 @@ module ans_proc (
             r_write_byte_cnt[7:0] <= r_write_byte_cnt[7:0] + 8'd1;
             r_uart_tx_en <= 1'b0;
 
-            if (r_write_byte_cnt[7:0] == 8'd45) begin   // End
+            if (r_write_byte_cnt[7:0] == 8'd44) begin   // End
                 r_write_byte_cnt[7:0] <= 8'd0;
                 r_uart_tx_busy <= 1'b0;
             end
@@ -85,7 +85,7 @@ module ans_proc (
 
     /* tx Data Select */
     wire    [7:0]   w_uart_tx_data = 
-                                     (r_write_byte_cnt[7:0] == 8'd0) ? getHexStr({3'd0, r_ph1[28]}) :
+                                     (r_write_byte_cnt[7:0] == 8'd0) ? getHexStr({2'd0, r_ph1[29:28]}) :
                                      (r_write_byte_cnt[7:0] == 8'd1) ? getHexStr(r_ph1[27:24]) :
                                      (r_write_byte_cnt[7:0] == 8'd2) ? getHexStr(r_ph1[23:20]) :
                                      (r_write_byte_cnt[7:0] == 8'd3) ? getHexStr(r_ph1[19:16]) :
@@ -95,7 +95,7 @@ module ans_proc (
                                      (r_write_byte_cnt[7:0] == 8'd7) ? getHexStr(r_ph1[3:0]) :
                                      (r_write_byte_cnt[7:0] == 8'd8) ? 8'h2c :   // ,
 
-                                     (r_write_byte_cnt[7:0] == 8'd9) ? getHexStr({3'd0, r_ph2[28]}) :
+                                     (r_write_byte_cnt[7:0] == 8'd9) ? getHexStr({2'd0, r_ph2[29:28]}) :
                                      (r_write_byte_cnt[7:0] == 8'd10) ? getHexStr(r_ph2[27:24]) :
                                      (r_write_byte_cnt[7:0] == 8'd11) ? getHexStr(r_ph2[23:20]) :
                                      (r_write_byte_cnt[7:0] == 8'd12) ? getHexStr(r_ph2[19:16]) :
@@ -105,7 +105,7 @@ module ans_proc (
                                      (r_write_byte_cnt[7:0] == 8'd16) ? getHexStr(r_ph2[3:0]) :
                                      (r_write_byte_cnt[7:0] == 8'd17) ? 8'h2c :   // ,
 
-                                     (r_write_byte_cnt[7:0] == 8'd18) ? getHexStr({3'd0, r_ph3[28]}) :
+                                     (r_write_byte_cnt[7:0] == 8'd18) ? getHexStr({2'd0, r_ph3[29:28]}) :
                                      (r_write_byte_cnt[7:0] == 8'd19) ? getHexStr(r_ph3[27:24]) :
                                      (r_write_byte_cnt[7:0] == 8'd20) ? getHexStr(r_ph3[23:20]) :
                                      (r_write_byte_cnt[7:0] == 8'd21) ? getHexStr(r_ph3[19:16]) :
@@ -115,7 +115,7 @@ module ans_proc (
                                      (r_write_byte_cnt[7:0] == 8'd25) ? getHexStr(r_ph3[3:0]) :
                                      (r_write_byte_cnt[7:0] == 8'd26) ? 8'h2c :   // ,
                                      
-                                     (r_write_byte_cnt[7:0] == 8'd27) ? getHexStr({3'd0, r_ph4[28]}) :
+                                     (r_write_byte_cnt[7:0] == 8'd27) ? getHexStr({2'd0, r_ph4[29:28]}) :
                                      (r_write_byte_cnt[7:0] == 8'd28) ? getHexStr(r_ph4[27:24]) :
                                      (r_write_byte_cnt[7:0] == 8'd29) ? getHexStr(r_ph4[23:20]) :
                                      (r_write_byte_cnt[7:0] == 8'd30) ? getHexStr(r_ph4[19:16]) :
