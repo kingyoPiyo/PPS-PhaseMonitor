@@ -48,6 +48,8 @@ module pps_top (
     wire    [29:0]  w_ph4;
     wire    [29:0]  w_ph5;
     wire    [27:0]  w_freq;
+    wire    [7:0]   w_uart_rx_data;
+    wire            w_uart_rx_den;
 
 
     // Clock generator from Onboard OSC
@@ -126,6 +128,16 @@ module pps_top (
         .i_freq ( w_freq[27:0] ),
         .i_tx_start ( w_ph_en ),
         .o_uart_tx ( UART_TX )
+    );
+    
+    
+    // UART RX
+    uart_rx uart_rx_inst (
+        .i_clk ( w_clk50m ),
+        .i_rst_n ( w_res_n1 ),
+        .i_uart_mosi ( UART_RX ),
+        .o_data ( w_uart_rx_data[7:0] ),
+        .o_dataen ( w_uart_rx_den )
     );
 
 
