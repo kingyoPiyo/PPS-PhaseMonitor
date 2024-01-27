@@ -1,2 +1,2 @@
 lvds_sim/lvds.v
-lvds_sim/altera_soft_lvds/altera_soft_lvds_rx_NW00c.v
+lvds_sim/altera_soft_lvds/altera_soft_lvds_rx_BWNr0.v

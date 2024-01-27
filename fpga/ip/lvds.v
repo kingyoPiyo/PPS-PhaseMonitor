@@ -7,18 +7,18 @@
 `timescale 1 ps / 1 ps
 module lvds (
 		input  wire        rx_inclock, // rx_inclock.rx_inclock
-		input  wire [3:0]  rx_in,      //      rx_in.rx_in
-		output wire [15:0] rx_out      //     rx_out.rx_out
+		input  wire [4:0]  rx_in,      //      rx_in.rx_in
+		output wire [19:0] rx_out      //     rx_out.rx_out
 	);
 
-	altera_soft_lvds_rx_NW00c lvds_inst (
+	altera_soft_lvds_rx_BWNr0 lvds_inst (
 		.rx_inclock            (rx_inclock), // rx_inclock.rx_inclock
 		.rx_in                 (rx_in),      //      rx_in.rx_in
 		.rx_out                (rx_out),     //     rx_out.rx_out
 		.rx_locked             (),           // (terminated)
 		.rx_data_align         (1'b0),       // (terminated)
-		.rx_channel_data_align (4'b0000),    // (terminated)
-		.rx_cda_reset          (4'b0000),    // (terminated)
+		.rx_channel_data_align (5'b00000),   // (terminated)
+		.rx_cda_reset          (5'b00000),   // (terminated)
 		.rx_data_align_reset   (1'b0)        // (terminated)
 	);
 
@@ -53,7 +53,7 @@ endmodule
 // Retrieval info: 	<generic name="DEVICE_FAMILY" value="MAX 10" />
 // Retrieval info: 	<generic name="DEVICE_TYPE" value="Dual Supply" />
 // Retrieval info: 	<generic name="FUNCTIONAL_MODE" value="RX" />
-// Retrieval info: 	<generic name="NUMBER_OF_CHANNELS" value="4" />
+// Retrieval info: 	<generic name="NUMBER_OF_CHANNELS" value="5" />
 // Retrieval info: 	<generic name="DESERIALIZATION_FACTOR" value="4" />
 // Retrieval info: 	<generic name="USE_EXTERNAL_PLL_UI" value="true" />
 // Retrieval info: 	<generic name="INPUT_DATA_RATE" value="720.0" />
@@ -118,4 +118,4 @@ endmodule
 // Retrieval info: 	<generic name="VOD_SETTING" value="0" />
 // Retrieval info: </instance>
 // IPFS_FILES : lvds.vo
-// RELATED_FILES: lvds.v, altera_soft_lvds_rx_NW00c.v
+// RELATED_FILES: lvds.v, altera_soft_lvds_rx_BWNr0.v

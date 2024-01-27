@@ -18,8 +18,15 @@ module pps_top (
     output  wire            UART_TX,
     input   wire            UART_RX,
 
+    // SFP
+    input   wire            SFP_LOS,
+    output  wire            SFP_TXD,
+    input   wire            SFP_RXD,
+
     // LED
     output  wire    [3:0]   PANEL_LED,  // High Active
+    output  wire            PANEL_PPS,  // PPS
+    output  wire            PANEL_ERR,  // ERROR
     output  wire    [4:0]   ONB_LED     // Low Active
     );
 
@@ -38,8 +45,8 @@ module pps_top (
     (* syn_keep=1 *) wire    [29:0]  w_ph2;
     (* syn_keep=1 *) wire    [29:0]  w_ph3;
     (* syn_keep=1 *) wire    [29:0]  w_ph4;
+    (* syn_keep=1 *) wire    [29:0]  w_ph5;
     (* syn_keep=1 *) wire    [27:0]  w_freq;
-    wire    w_pps4_sel;
 
 
     // Clock generator from Onboard OSC
@@ -63,9 +70,9 @@ module pps_top (
         .locked ( w_refpll_locked )
 	);
 
+    assign SFP_TXD = w_ref10m;  // Debug
     
     // Phase measurement
-    assign w_pps4_sel = USER_DIPSW[0] ? PPS4 : PPSO1;
     phase_meas phase_meas_inst (
         .i_res_n ( RST_N ),
         .i_fclk ( w_clk500m ),  // DDR Sampling clock
@@ -74,13 +81,14 @@ module pps_top (
         .i_pps1 ( PPS1 ),
         .i_pps2 ( PPS2 ),
         .i_pps3 ( PPS3 ),
-        //.i_pps4 ( PPS4 ),
-        .i_pps4 ( w_pps4_sel ),
+        .i_pps4 ( PPS4 ),
+        .i_pps5 ( PPSO1 ),
         .o_ph_en ( w_ph_en ),   // ** 50MHz **
         .o_ph1 ( w_ph1[29:0] ), // ** 50MHz **
         .o_ph2 ( w_ph2[29:0] ), // ** 50MHz **
         .o_ph3 ( w_ph3[29:0] ), // ** 50MHz **
-        .o_ph4 ( w_ph4[29:0] )  // ** 50MHz **
+        .o_ph4 ( w_ph4[29:0] ), // ** 50MHz **
+        .o_ph5 ( w_ph5[29:0] )  // ** 50MHz **
     );
 
 
@@ -103,6 +111,7 @@ module pps_top (
         .i_ph2 ( w_ph2[29:0] ),
         .i_ph3 ( w_ph3[29:0] ),
         .i_ph4 ( w_ph4[29:0] ),
+        .i_ph5 ( w_ph5[29:0] ),
         .i_freq ( w_freq[27:0] ),
         .i_tx_start ( w_ph_en ),
         .o_uart_tx ( UART_TX )
@@ -122,12 +131,15 @@ module pps_top (
     assign ONB_LED[0] = ~PPS1;
     assign ONB_LED[1] = ~PPS2;
     assign ONB_LED[2] = ~PPS3;
-    assign ONB_LED[3] = ~w_pps4_sel;
-    assign ONB_LED[4] = ~w_refpll_locked;
+    assign ONB_LED[3] = ~PPS4;
+    assign ONB_LED[4] = 1'b1;
+
     assign PANEL_LED[0] = PPS1;
     assign PANEL_LED[1] = PPS2;
     assign PANEL_LED[2] = PPS3;
-    assign PANEL_LED[3] = w_pps4_sel;
-    //assign PANEL_LED[3] = PPSO1;
+    assign PANEL_LED[3] = PPS4;
+    
+    assign PANEL_PPS = PPSO1;
+    assign PANEL_ERR = ~w_refpll_locked;
 
 endmodule

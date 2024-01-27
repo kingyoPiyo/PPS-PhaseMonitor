@@ -105,8 +105,8 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name ENABLE_SIGNALTAP ON
 set_global_assignment -name USE_SIGNALTAP_FILE stp1.stp
-set_location_assignment PIN_A3 -to PPSO1
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PPSO1
+set_location_assignment PIN_A2 -to PPSO1
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PPSO1
 set_location_assignment PIN_K22 -to REF_CLK
 set_instance_assignment -name IO_STANDARD "1.2 V" -to REF_CLK
 set_location_assignment PIN_D8 -to UART_TX
@@ -349,5 +349,21 @@ set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK_LE
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[12] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[23] -to auto_signaltap_0|vcc -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[27] -to auto_signaltap_0|vcc -section_id auto_signaltap_0
+set_location_assignment PIN_A3 -to SFP_LOS
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to SFP_LOS
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to SFP_LOS
+set_location_assignment PIN_W3 -to SFP_TXD
+set_instance_assignment -name IO_STANDARD LVDS -to SFP_TXD
+set_location_assignment PIN_W4 -to "SFP_TXD(n)"
+set_location_assignment PIN_C18 -to PANEL_PPS
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PANEL_PPS
+set_location_assignment PIN_E16 -to PANEL_ERR
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PANEL_ERR
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_ERR
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_PPS
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_LED[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_LED[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_LED[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_LED[0]
 set_global_assignment -name SLD_FILE db/stp1_auto_stripped.stp
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
