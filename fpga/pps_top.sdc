@@ -143,6 +143,7 @@ set_clock_groups -asynchronous -group [get_clocks {altera_reserved_tck}]
 set_false_path -from [get_ports {RST_N}]
 set_false_path -from [get_ports {USER_PB[*]}]
 set_false_path -from [get_ports {USER_DIPSW[*]}]
+set_false_path -from [get_ports {REF_CLK}]
 set_false_path -from [get_ports {PPS1}]
 set_false_path -from [get_ports {PPS2}]
 set_false_path -from [get_ports {PPS3}]
@@ -152,6 +153,9 @@ set_false_path -to [get_ports {UART_TX}]
 set_false_path -from [get_ports {UART_RX}]
 set_false_path -to [get_ports {PANEL_LED[*]}]
 set_false_path -to [get_ports {ONB_LED[*]}]
+set_false_path -to [get_ports {PANEL_ERR}]
+set_false_path -to [get_ports {PANEL_PPS}]
+set_false_path -to [get_ports {SFP_TXD}]
 
 # w_clk250m -> w_clk50m
 # phase_meas.v
