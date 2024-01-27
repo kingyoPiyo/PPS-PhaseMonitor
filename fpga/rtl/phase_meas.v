@@ -201,8 +201,8 @@ module phase_meas (
         if (~i_res_n) begin
             r_pps1_ff_50m[2:0] <= 3'd0;
         end else begin
-            r_pps1_ff_50m[2:0] <= {r_pps1_ff_50m[1:0], i_pps1};
-            //r_pps1_ff_50m[2:0] <= {r_pps1_ff_50m[1:0], w_dt20b[0]};
+            //r_pps1_ff_50m[2:0] <= {r_pps1_ff_50m[1:0], i_pps1};
+            r_pps1_ff_50m[2:0] <= {r_pps1_ff_50m[1:0], w_dt20b[0]};
         end
     end
 
