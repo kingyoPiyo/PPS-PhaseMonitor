@@ -50,14 +50,7 @@ create_clock -name {REF_CLK} -period 200.000 -waveform { 0.000 100.000 } [get_po
 create_generated_clock -name {w_clk50m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 1 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[2]}] 
 create_generated_clock -name {w_clk250m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 5 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[1]}] 
 create_generated_clock -name {w_clk500m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 10 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] 
-
 create_generated_clock -name {w_ref100m} -source [get_pins {pll_ref_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 20 -master_clock {REF_CLK} [get_pins {pll_ref_inst|altpll_component|auto_generated|pll1|clk[1]}] 
-
-
-#**************************************************************
-# Set Clock Latency
-#**************************************************************
-
 
 
 #**************************************************************
@@ -94,17 +87,14 @@ set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -rise_to [get_clocks {
 set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_ref100m}]  0.020  
  
 
-
 #**************************************************************
 # Set Input Delay
 #**************************************************************
 
 
-
 #**************************************************************
 # Set Output Delay
 #**************************************************************
-
 
 
 #**************************************************************
@@ -120,10 +110,6 @@ set_false_path -from [get_ports {RST_N}]
 set_false_path -from [get_ports {USER_PB[*]}]
 set_false_path -from [get_ports {USER_DIPSW[*]}]
 set_false_path -from [get_ports {REF_CLK}]
-set_false_path -from [get_ports {PPS1}]
-set_false_path -from [get_ports {PPS2}]
-set_false_path -from [get_ports {PPS3}]
-set_false_path -from [get_ports {PPS4}]
 set_false_path -to [get_ports {PPSO1}]
 set_false_path -to [get_ports {UART_TX}]
 set_false_path -from [get_ports {UART_RX}]
@@ -141,25 +127,13 @@ set_false_path -from [get_clocks {w_clk250m}] -to [get_clocks {w_clk50m}]
 # freq_counter.v
 set_false_path -from [get_clocks {w_ref100m}] -to [get_clocks {w_clk50m}]
 
-#**************************************************************
-# Set Multicycle Path
-#**************************************************************
-
-
 
 #**************************************************************
-# Set Maximum Delay
+# Set Maximum Skew
 #**************************************************************
 
+set_max_skew -from [get_ports {PPS1 PPS2 PPS3 PPS4}] 0.010
 
+# report_skew -from [get_ports {PPS1 PPS2 PPS3 PPS4}] -npaths 100 -detail path_only -panel_name {Report Skew} -multi_corner
 
-#**************************************************************
-# Set Minimum Delay
-#**************************************************************
-
-
-
-#**************************************************************
-# Set Input Transition
-#**************************************************************
 
