@@ -34,19 +34,20 @@ module pps_top (
     // Wire
     wire    w_clk500m;
     wire    w_clk250m;
-    wire    w_clk100m;
     wire    w_clk50m;
     wire    w_pll_locked;
     wire    w_ref10m;
     wire    w_ref100m;
     wire    w_refpll_locked;
+    wire    w_res_n1;
+    wire    w_res_n2;
     wire    w_ph_en;
-    (* syn_keep=1 *) wire    [29:0]  w_ph1;
-    (* syn_keep=1 *) wire    [29:0]  w_ph2;
-    (* syn_keep=1 *) wire    [29:0]  w_ph3;
-    (* syn_keep=1 *) wire    [29:0]  w_ph4;
-    (* syn_keep=1 *) wire    [29:0]  w_ph5;
-    (* syn_keep=1 *) wire    [27:0]  w_freq;
+    wire    [29:0]  w_ph1;
+    wire    [29:0]  w_ph2;
+    wire    [29:0]  w_ph3;
+    wire    [29:0]  w_ph4;
+    wire    [29:0]  w_ph5;
+    wire    [27:0]  w_freq;
 
 
     // Clock generator from Onboard OSC
@@ -54,12 +55,10 @@ module pps_top (
         .areset ( ~RST_N ),
         .inclk0 ( MCO ),        // 50MHz
         .c0 ( w_clk500m ),      // 500MHz
-        .c1 ( w_clk100m ),      // 100MHz
+        .c1 ( w_clk250m ),      // 250MHz
         .c2 ( w_clk50m ),       // 50MHz
-        .c3 ( w_clk250m ),      // 250MHz
         .locked ( w_pll_locked )
 	);
-
 
     // Clock generator from External Ref-clock
     pll_ref	pll_ref_inst (
@@ -70,11 +69,23 @@ module pps_top (
         .locked ( w_refpll_locked )
 	);
 
+    // Reset **TODO**
+    reset_gen reset_gen_main_pll (
+        .i_clk ( w_clk50m ),
+        .i_res_n ( RST_N & w_pll_locked ),
+        .o_res_n ( w_res_n1 )
+    );
+    reset_gen reset_gen_ref_pll (
+        .i_clk ( w_ref100m ),
+        .i_res_n ( RST_N & w_refpll_locked ),
+        .o_res_n ( w_res_n2 )
+    );
+
     assign SFP_TXD = w_ref10m;  // Debug
     
     // Phase measurement
     phase_meas phase_meas_inst (
-        .i_res_n ( RST_N ),
+        .i_res_n ( w_res_n1 ),
         .i_fclk ( w_clk500m ),  // DDR Sampling clock
         .i_pclk ( w_clk250m ),  // Parallel clock
         .i_lclk ( w_clk50m ),   // Output clock
@@ -97,7 +108,7 @@ module pps_top (
     //  - Gate   : PPS1
     freq_counter freq_counter_inst (
         .i_clk ( w_ref100m ),   // Ref 100MHz
-        .i_res_n ( RST_N ),
+        .i_res_n ( w_res_n2 ),
         .i_pps ( PPS1 ),        // 1PPS signal from GPS
         .o_freq ( w_freq[27:0] )
     );
@@ -106,7 +117,7 @@ module pps_top (
     // UART TX
     ans_proc ans_proc_inst (
         .i_clk ( w_clk50m ),
-        .i_rst_n ( RST_N ),
+        .i_rst_n ( w_res_n1 ),
         .i_ph1 ( w_ph1[29:0] ),
         .i_ph2 ( w_ph2[29:0] ),
         .i_ph3 ( w_ph3[29:0] ),
@@ -121,7 +132,7 @@ module pps_top (
     // 1PPS signal generator
     pps_gen pps_gen_inst (
         .i_clk ( w_ref100m ),
-        .i_res_n ( RST_N ),
+        .i_res_n ( w_res_n2 ),
         .i_ph_sync ( PPS1 & ~USER_PB[0] ),
         .o_pps ( PPSO1 )
     );

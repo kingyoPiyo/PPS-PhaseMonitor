@@ -39,7 +39,6 @@ set_time_format -unit ns -decimal_places 3
 # Create Clock
 #**************************************************************
 
-create_clock -name {altera_reserved_tck} -period 100.000 -waveform { 0.000 50.000 } [get_ports {altera_reserved_tck}]
 create_clock -name {MCO} -period 20.000 -waveform { 0.000 10.000 } [get_ports {MCO}]
 create_clock -name {REF_CLK} -period 200.000 -waveform { 0.000 100.000 } [get_ports {REF_CLK}]
 
@@ -48,11 +47,11 @@ create_clock -name {REF_CLK} -period 200.000 -waveform { 0.000 100.000 } [get_po
 # Create Generated Clock
 #**************************************************************
 
-create_generated_clock -name {w_ref100m} -source [get_pins {pll_ref_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 20 -master_clock {REF_CLK} [get_pins {pll_ref_inst|altpll_component|auto_generated|pll1|clk[1]}] 
-create_generated_clock -name {w_clk500m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 10 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] 
-create_generated_clock -name {w_clk100m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 2 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[1]}] 
 create_generated_clock -name {w_clk50m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 1 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[2]}] 
-create_generated_clock -name {w_clk250m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 5 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[3]}] 
+create_generated_clock -name {w_clk250m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 5 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[1]}] 
+create_generated_clock -name {w_clk500m} -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 10 -master_clock {MCO} [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] 
+
+create_generated_clock -name {w_ref100m} -source [get_pins {pll_ref_inst|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50/1 -multiply_by 20 -master_clock {REF_CLK} [get_pins {pll_ref_inst|altpll_component|auto_generated|pll1|clk[1]}] 
 
 
 #**************************************************************
@@ -65,54 +64,35 @@ create_generated_clock -name {w_clk250m} -source [get_pins {pll_inst|altpll_comp
 # Set Clock Uncertainty
 #**************************************************************
 
-set_clock_uncertainty -rise_from [get_clocks {altera_reserved_tck}] -rise_to [get_clocks {altera_reserved_tck}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {altera_reserved_tck}] -fall_to [get_clocks {altera_reserved_tck}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {altera_reserved_tck}] -rise_to [get_clocks {altera_reserved_tck}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {altera_reserved_tck}] -fall_to [get_clocks {altera_reserved_tck}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {REF_CLK}] -rise_to [get_clocks {w_clk100m}]  0.150  
-set_clock_uncertainty -rise_from [get_clocks {REF_CLK}] -fall_to [get_clocks {w_clk100m}]  0.150  
-set_clock_uncertainty -fall_from [get_clocks {REF_CLK}] -rise_to [get_clocks {w_clk100m}]  0.150  
-set_clock_uncertainty -fall_from [get_clocks {REF_CLK}] -fall_to [get_clocks {w_clk100m}]  0.150  
-set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_ref100m}]  0.030  
-set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_ref100m}]  0.030  
-set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_clk100m}] -setup 0.160  
-set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_clk100m}] -hold 0.150  
-set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_clk100m}] -setup 0.160  
-set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_clk100m}] -hold 0.150  
-set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_ref100m}]  0.030  
-set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_ref100m}]  0.030  
-set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_clk100m}] -setup 0.160  
-set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_clk100m}] -hold 0.150  
-set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_clk100m}] -setup 0.160  
-set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_clk100m}] -hold 0.150  
-set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk500m}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk500m}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk50m}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk50m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk500m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk500m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk50m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk50m}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {w_clk100m}] -rise_to [get_clocks {w_ref100m}] -setup 0.150  
-set_clock_uncertainty -rise_from [get_clocks {w_clk100m}] -rise_to [get_clocks {w_ref100m}] -hold 0.160  
-set_clock_uncertainty -rise_from [get_clocks {w_clk100m}] -fall_to [get_clocks {w_ref100m}] -setup 0.150  
-set_clock_uncertainty -rise_from [get_clocks {w_clk100m}] -fall_to [get_clocks {w_ref100m}] -hold 0.160  
-set_clock_uncertainty -rise_from [get_clocks {w_clk100m}] -rise_to [get_clocks {w_clk100m}]  0.030  
-set_clock_uncertainty -rise_from [get_clocks {w_clk100m}] -fall_to [get_clocks {w_clk100m}]  0.030  
-set_clock_uncertainty -fall_from [get_clocks {w_clk100m}] -rise_to [get_clocks {w_ref100m}] -setup 0.150  
-set_clock_uncertainty -fall_from [get_clocks {w_clk100m}] -rise_to [get_clocks {w_ref100m}] -hold 0.160  
-set_clock_uncertainty -fall_from [get_clocks {w_clk100m}] -fall_to [get_clocks {w_ref100m}] -setup 0.150  
-set_clock_uncertainty -fall_from [get_clocks {w_clk100m}] -fall_to [get_clocks {w_ref100m}] -hold 0.160  
-set_clock_uncertainty -fall_from [get_clocks {w_clk100m}] -rise_to [get_clocks {w_clk100m}]  0.030  
-set_clock_uncertainty -fall_from [get_clocks {w_clk100m}] -fall_to [get_clocks {w_clk100m}]  0.030  
-set_clock_uncertainty -rise_from [get_clocks {w_clk50m}] -rise_to [get_clocks {w_clk100m}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {w_clk50m}] -fall_to [get_clocks {w_clk100m}]  0.020  
 set_clock_uncertainty -rise_from [get_clocks {w_clk50m}] -rise_to [get_clocks {w_clk50m}]  0.020  
 set_clock_uncertainty -rise_from [get_clocks {w_clk50m}] -fall_to [get_clocks {w_clk50m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk50m}] -rise_to [get_clocks {w_clk100m}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {w_clk50m}] -fall_to [get_clocks {w_clk100m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk50m}] -rise_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk50m}] -fall_to [get_clocks {w_clk250m}]  0.020  
 set_clock_uncertainty -fall_from [get_clocks {w_clk50m}] -rise_to [get_clocks {w_clk50m}]  0.020  
 set_clock_uncertainty -fall_from [get_clocks {w_clk50m}] -fall_to [get_clocks {w_clk50m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk50m}] -rise_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk50m}] -fall_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk250m}] -rise_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk250m}] -fall_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk250m}] -rise_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk250m}] -fall_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk500m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk500m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk250m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -rise_to [get_clocks {w_clk500m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_clk500m}] -fall_to [get_clocks {w_clk500m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_clk500m}]  0.150  
+set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_clk500m}]  0.150  
+set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_ref100m}]  0.020  
+set_clock_uncertainty -rise_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_ref100m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_clk500m}]  0.150  
+set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_clk500m}]  0.150  
+set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -rise_to [get_clocks {w_ref100m}]  0.020  
+set_clock_uncertainty -fall_from [get_clocks {w_ref100m}] -fall_to [get_clocks {w_ref100m}]  0.020  
+ 
 
 
 #**************************************************************
@@ -130,10 +110,6 @@ set_clock_uncertainty -fall_from [get_clocks {w_clk50m}] -fall_to [get_clocks {w
 #**************************************************************
 # Set Clock Groups
 #**************************************************************
-
-set_clock_groups -asynchronous -group [get_clocks {altera_reserved_tck}] 
-set_clock_groups -asynchronous -group [get_clocks {altera_reserved_tck}] 
-set_clock_groups -asynchronous -group [get_clocks {altera_reserved_tck}] 
 
 
 #**************************************************************

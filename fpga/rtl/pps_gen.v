@@ -7,6 +7,10 @@ module pps_gen (
     output  reg     o_pps
     );
 
+    localparam DEF_CNT_MAX      = 27'd99999999;
+    localparam DEF_CNT_PW       = 27'd9999999;
+    localparam DEF_CNT_SYNC_DLY = 27'd3;
+
     // 同期信号立ち上がりエッジ検出
     reg     [2:0]   r_sync_ff;
     wire            w_sync_en = (r_sync_ff[2:1] == 2'b01);
@@ -20,11 +24,13 @@ module pps_gen (
 
     // Counter
     reg     [26:0]  r_cnt;
-    wire            w_cnt_max = (r_cnt == 27'd99999999);
+    wire            w_cnt_max = (r_cnt == DEF_CNT_MAX);
     always @(posedge i_clk or negedge i_res_n) begin
         if (~i_res_n) begin
             r_cnt[26:0] <= 27'd0;
-        end else if (w_sync_en | w_cnt_max) begin
+        end else if (w_sync_en) begin
+            r_cnt[26:0] <= DEF_CNT_SYNC_DLY;
+        end else if (w_cnt_max) begin
             r_cnt[26:0] <= 27'd0;
         end else begin
             r_cnt[26:0] <= r_cnt[26:0] + 27'd1;
@@ -37,7 +43,7 @@ module pps_gen (
             o_pps <= 1'b0;
         end else begin
             if (r_cnt[26:0] == 27'd0)       o_pps <= 1'b1;
-            if (r_cnt[26:0] == 27'd9999999) o_pps <= 1'b0;
+            if (r_cnt[26:0] == DEF_CNT_PW)  o_pps <= 1'b0;
         end
     end
 

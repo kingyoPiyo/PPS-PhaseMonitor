@@ -17,7 +17,7 @@ module uart_tx (
     );
     
     parameter   DIV_WID = 9;
-    parameter   DIV_CNT = 434 - 1;  // i_clk = 50MHz, miso_clk = 115200
+    parameter   DIV_CNT = 9'd433;  // i_clk = 50MHz, miso_clk = 115200, 50MHz / 115200bps - 1
     
     reg     [9:0]       data;       // startbit + data + stopbit
     reg                 txempty;
