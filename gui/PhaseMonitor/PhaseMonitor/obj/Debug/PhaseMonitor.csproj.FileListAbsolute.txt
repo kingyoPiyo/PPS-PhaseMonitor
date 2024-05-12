@@ -1,0 +1,19 @@
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\bin\Debug\PhaseMonitor.exe.config
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\bin\Debug\PhaseMonitor.exe
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\bin\Debug\PhaseMonitor.pdb
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.Form1.resources
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.Properties.Resources.resources
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.csproj.GenerateResource.cache
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.csproj.CoreCompileInputs.cache
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.exe
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.pdb
+C:\Users\kingyo\Desktop\x\FPGA\Tang-Nano\ADC\PC Tool\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.csproj.AssemblyReference.cache
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\bin\Debug\PhaseMonitor.exe.config
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\bin\Debug\PhaseMonitor.exe
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\bin\Debug\PhaseMonitor.pdb
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.Form1.resources
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.Properties.Resources.resources
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.csproj.GenerateResource.cache
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.csproj.CoreCompileInputs.cache
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.exe
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.pdb
