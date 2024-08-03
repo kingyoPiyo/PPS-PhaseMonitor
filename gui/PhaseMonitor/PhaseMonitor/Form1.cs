@@ -9,38 +9,38 @@ namespace PhaseMonitor
 	public partial class Form1 : Form
 	{
 		int rxCnt = 0;
-		double freq_sum = 0;
+		UInt64 freq_sum_10 = 0;
 		string rcv_data = "";
 		string[] arr = { "1", "2", "3", "4", "5", "6"};
-		int ph1 = 0;
-		int ph2 = 0;
-		int ph3 = 0;
-		int ph4 = 0;
-		int ph5 = 0;
+		Int64 ph1 = 0;
+		Int64 ph2 = 0;
+		Int64 ph3 = 0;
+		Int64 ph4 = 0;
+		Int64 ph5 = 0;
+
+		const int CHRT_MAX_NUM = 4;
+		const int MAX_PHASE_ERR_NS = 100000000;	// +- 100ms
 
 		bool isCOM_Open = false;
 
 
-		List<int> m_DataList1 = new List<int>();
-		List<int> m_DataList2 = new List<int>();
-		List<int> m_DataList3 = new List<int>();
-		List<int> m_DataList4 = new List<int>();
-
 		public Form1()
 		{
 			InitializeComponent();
-			scanCOMPorts();
-			
-			// チャート初期化
-			//chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
 
-			//　データ初期化
-			int temp = 0;
-			for (int i = 0; i < 100; i++) {
-				m_DataList1.Add(temp);
-				m_DataList2.Add(temp);
-				m_DataList3.Add(temp);
-				m_DataList4.Add(temp);
+
+			// 設定読み出し
+			//DataMod dt = new DataMod();
+			//dt.LogSave();
+			//dt.LogLoad();
+
+			scanCOMPorts();
+
+			// チャート初期化
+			for (int i = 0; i < CHRT_MAX_NUM; i++)
+			{
+				chart1.Series[i].BorderWidth = 3;
+				chart1.Series[i].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
 			}
 		}
 
@@ -52,6 +52,10 @@ namespace PhaseMonitor
 			foreach (string p in ports)
 			{
 				comboBox_COM_Port.Items.Add(p);
+			}
+
+			if (ports.Length > 0) {
+				comboBox_COM_Port.SelectedIndex = 0;
 			}
 		}
 
@@ -75,6 +79,7 @@ namespace PhaseMonitor
 
 					button1.Text = "Close";
 					comboBox_COM_Port.Enabled = false;
+					isCOM_Open = true;
 				}
 				catch
 				{
@@ -84,7 +89,8 @@ namespace PhaseMonitor
 					{
 						serialPort1.DiscardInBuffer();  // 入力バッファを破棄
 						serialPort1.DiscardOutBuffer(); // 出力バッファを破棄
-						serialPort1.Close();             // COMポートを閉じる
+						serialPort1.Close();            // COMポートを閉じる
+						isCOM_Open = false;
 					}
 					catch { };
 				}
@@ -97,7 +103,8 @@ namespace PhaseMonitor
 				{
 					serialPort1.DiscardInBuffer();  // 入力バッファを破棄
 					serialPort1.DiscardOutBuffer(); // 出力バッファを破棄
-					serialPort1.Close();             // COMポートを閉じる
+					serialPort1.Close();            // COMポートを閉じる
+					isCOM_Open = false;
 				}
 				catch { };
 			}
@@ -116,38 +123,35 @@ namespace PhaseMonitor
 			textBox_Cnt.Text = rxCnt.ToString();
 			textBox_NowFreq.Text = str;
 
-			double ave_freq = freq_sum / rxCnt;
+			double ave_freq = (double)freq_sum_10 / 10.0 / rxCnt;
 			textBox_AveFreq.Text = ave_freq.ToString("0,####.000000");
 			double error_ppb = 1000000000 * (ave_freq - 10000000)/10000000;
 			textBox_freqerror.Text = error_ppb.ToString("0.000000");
 		}
 
 
-		private void chart_add1(int num)
+		private void chart_add1(Int64 num)
 		{
 			chart1.Series[0].Points.Add(num);
-			chart1.Series[0].BorderWidth = 3;
 			textBox_ch1.Text = num.ToString();
 		}
 
-		private void chart_add2(int num)
+		private void chart_add2(Int64 num)
 		{
 			chart1.Series[1].Points.Add(num);
-			chart1.Series[1].BorderWidth = 3;
 			textBox_ch2.Text = num.ToString();
 		}
 
-		private void chart_add3(int num)
+		private void chart_add3(Int64 num)
 		{
 			chart1.Series[2].Points.Add(num);
-			chart1.Series[2].BorderWidth = 3;
+
 			textBox_ch3.Text = num.ToString();
 		}
 
-		private void chart_add4(int num)
+		private void chart_add4(Int64 num)
 		{
 			chart1.Series[3].Points.Add(num);
-			chart1.Series[3].BorderWidth = 3;
 			textBox_ch4.Text = num.ToString();
 		}
 
@@ -163,6 +167,45 @@ namespace PhaseMonitor
 			int pps = rxCnt - oldCnt;
 			oldCnt = rxCnt;
 			label_pps.Text = pps.ToString() + "[Packets / s]";
+		}
+
+
+		// 位相差計算
+		private Int64 calc_pd(Int64 t, Int64 r)
+		{
+			Int64 max = 1073741820;
+			Int64 ret = 0;
+
+#if False
+
+			if (r < t)
+			{
+				if (t - max - r < (max/2))
+				{
+					ret = t - max - r;
+				} else
+				{
+					ret = t - r;
+				}
+			} else
+			{
+				if (t - r < (max / 2))
+				{
+					ret = t - r;
+				} else
+				{
+					ret = max + t - r;
+				}
+			}
+#else
+			ret = t - r;
+#endif
+
+			// Clip
+			if (ret > MAX_PHASE_ERR_NS) ret = MAX_PHASE_ERR_NS;
+			if (ret < (-1 * MAX_PHASE_ERR_NS)) ret = (-1 * MAX_PHASE_ERR_NS);
+
+			return ret;
 		}
 
 
@@ -192,21 +235,31 @@ namespace PhaseMonitor
 
 				// 周波数表示
 				double freq_hz = freq10 / 10.0;
-				freq_sum += freq_hz;
+				freq_sum_10 += (UInt64)freq10;
 				textBox_NowFreq.BeginInvoke(new Action<string>(ShowSwState), freq_hz.ToString("0,####.0"));
 
 
-				// 位相差チャート表示
-				chart1.BeginInvoke(new Action<int>(chart_add1), ph1 - ph5);
-				chart1.BeginInvoke(new Action<int>(chart_add2), ph2 - ph5);
-				chart1.BeginInvoke(new Action<int>(chart_add3), ph3 - ph5);
-				chart1.BeginInvoke(new Action<int>(chart_add4), ph4 - ph5);
+				// 位相差計算 & チャート表示
+				chart1.BeginInvoke(new Action<Int64>(chart_add1), calc_pd(ph1, ph5));
+				chart1.BeginInvoke(new Action<Int64>(chart_add2), calc_pd(ph2, ph5));
+				chart1.BeginInvoke(new Action<Int64>(chart_add3), calc_pd(ph3, ph5));
+				chart1.BeginInvoke(new Action<Int64>(chart_add4), calc_pd(ph4, ph5));
 
 				// Log
 				if (checkBox_LogEn.Checked)
 				{
-					string log_txt = rxCnt.ToString() + ","
+					string log_txt = "";
+					if (checkBox_time_stamp.Checked)
+					{
+						DateTime dt = DateTime.Now;
+
+						log_txt = rxCnt.ToString() + "," + dt.ToString("yyyy/MM/dd HH:mm:ss") + ","
 						+ ph1.ToString() + "," + ph2.ToString() + "," + ph3.ToString() + "," + ph4.ToString() + "," + ph5.ToString() + "," + freq10.ToString() + "\n";
+					} else
+					{
+						log_txt = rxCnt.ToString() + ","
+						+ ph1.ToString() + "," + ph2.ToString() + "," + ph3.ToString() + "," + ph4.ToString() + "," + ph5.ToString() + "," + freq10.ToString() + "\n";
+					}
 					richTextBox_log.BeginInvoke(new Action<string>(Add_log), log_txt);
 				}
 			}
@@ -238,13 +291,22 @@ namespace PhaseMonitor
 
 		private void button_clear_Click(object sender, EventArgs e)
 		{
-			chart1.Series[0].Points.Clear();
-			chart1.Series[1].Points.Clear();
-			chart1.Series[2].Points.Clear();
-			chart1.Series[3].Points.Clear();
+			for (int i = 0; i < CHRT_MAX_NUM; i++)
+			{
+				bool tmp = chart1.Series[i].Enabled;
+				chart1.Series[i].Enabled = false;
+				chart1.Series[i].Points.Clear();
+				chart1.Series[i].Enabled = tmp;
+			}
 			rxCnt = 0;
-			freq_sum = 0;
-			richTextBox_log.Text = "";
+			freq_sum_10 = 0;
+			richTextBox_log.Clear();
+			richTextBox_log.Update();
+		}
+
+		private void checkBox_LogEn_CheckedChanged(object sender, EventArgs e)
+		{
+			checkBox_time_stamp.Enabled = !checkBox_LogEn.Checked;
 		}
 	}
 }

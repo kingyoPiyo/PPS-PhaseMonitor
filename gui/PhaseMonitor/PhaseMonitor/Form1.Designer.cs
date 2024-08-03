@@ -29,12 +29,12 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.button1 = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
@@ -48,6 +48,7 @@
 			this.label_pps = new System.Windows.Forms.Label();
 			this.textBox_ch1 = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.textBox_ch1_name = new System.Windows.Forms.TextBox();
 			this.checkBox_ch1_grfen = new System.Windows.Forms.CheckBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -61,14 +62,17 @@
 			this.label8 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.textBox_ch2_name = new System.Windows.Forms.TextBox();
 			this.checkBox_ch2_grfen = new System.Windows.Forms.CheckBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBox_ch2 = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.textBox_ch3_name = new System.Windows.Forms.TextBox();
 			this.checkBox_ch3_grfen = new System.Windows.Forms.CheckBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.textBox_ch3 = new System.Windows.Forms.TextBox();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.textBox_ch4_name = new System.Windows.Forms.TextBox();
 			this.checkBox_ch4_grfen = new System.Windows.Forms.CheckBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.textBox_ch4 = new System.Windows.Forms.TextBox();
@@ -76,6 +80,7 @@
 			this.richTextBox_log = new System.Windows.Forms.RichTextBox();
 			this.checkBox_LogEn = new System.Windows.Forms.CheckBox();
 			this.comboBox_COM_Port = new System.Windows.Forms.ComboBox();
+			this.checkBox_time_stamp = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.groupBox5.SuspendLayout();
@@ -136,34 +141,34 @@
 			this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			chartArea1.AxisX.Title = "Time [s]";
-			chartArea1.AxisY.Title = "Phase Error [ns]";
-			chartArea1.Name = "ChartArea1";
-			this.chart1.ChartAreas.Add(chartArea1);
-			legend1.Name = "Legend1";
-			this.chart1.Legends.Add(legend1);
+			chartArea2.AxisX.Title = "Time [s]";
+			chartArea2.AxisY.Title = "Phase Error [ns]";
+			chartArea2.Name = "ChartArea1";
+			this.chart1.ChartAreas.Add(chartArea2);
+			legend2.Name = "Legend1";
+			this.chart1.Legends.Add(legend2);
 			this.chart1.Location = new System.Drawing.Point(12, 141);
 			this.chart1.Name = "chart1";
-			series1.ChartArea = "ChartArea1";
-			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series1.Legend = "Legend1";
-			series1.Name = "CH1";
-			series2.ChartArea = "ChartArea1";
-			series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series2.Legend = "Legend1";
-			series2.Name = "CH2";
-			series3.ChartArea = "ChartArea1";
-			series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series3.Legend = "Legend1";
-			series3.Name = "CH3";
-			series4.ChartArea = "ChartArea1";
-			series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series4.Legend = "Legend1";
-			series4.Name = "CH4";
-			this.chart1.Series.Add(series1);
-			this.chart1.Series.Add(series2);
-			this.chart1.Series.Add(series3);
-			this.chart1.Series.Add(series4);
+			series5.ChartArea = "ChartArea1";
+			series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series5.Legend = "Legend1";
+			series5.Name = "CH1";
+			series6.ChartArea = "ChartArea1";
+			series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series6.Legend = "Legend1";
+			series6.Name = "CH2";
+			series7.ChartArea = "ChartArea1";
+			series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series7.Legend = "Legend1";
+			series7.Name = "CH3";
+			series8.ChartArea = "ChartArea1";
+			series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series8.Legend = "Legend1";
+			series8.Name = "CH4";
+			this.chart1.Series.Add(series5);
+			this.chart1.Series.Add(series6);
+			this.chart1.Series.Add(series7);
+			this.chart1.Series.Add(series8);
 			this.chart1.Size = new System.Drawing.Size(1015, 514);
 			this.chart1.TabIndex = 5;
 			this.chart1.Text = "chart1";
@@ -203,6 +208,7 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.textBox_ch1_name);
 			this.groupBox1.Controls.Add(this.checkBox_ch1_grfen);
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Controls.Add(this.textBox_ch1);
@@ -213,16 +219,24 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "CH1";
 			// 
+			// textBox_ch1_name
+			// 
+			this.textBox_ch1_name.Location = new System.Drawing.Point(5, 18);
+			this.textBox_ch1_name.Name = "textBox_ch1_name";
+			this.textBox_ch1_name.Size = new System.Drawing.Size(129, 19);
+			this.textBox_ch1_name.TabIndex = 5;
+			this.textBox_ch1_name.Text = "CH1_NAME";
+			// 
 			// checkBox_ch1_grfen
 			// 
 			this.checkBox_ch1_grfen.AutoSize = true;
 			this.checkBox_ch1_grfen.Checked = true;
 			this.checkBox_ch1_grfen.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox_ch1_grfen.Location = new System.Drawing.Point(6, 18);
+			this.checkBox_ch1_grfen.Location = new System.Drawing.Point(141, 20);
 			this.checkBox_ch1_grfen.Name = "checkBox_ch1_grfen";
-			this.checkBox_ch1_grfen.Size = new System.Drawing.Size(73, 16);
+			this.checkBox_ch1_grfen.Size = new System.Drawing.Size(40, 16);
 			this.checkBox_ch1_grfen.TabIndex = 4;
-			this.checkBox_ch1_grfen.Text = "グラフ表示";
+			this.checkBox_ch1_grfen.Text = "GV";
 			this.checkBox_ch1_grfen.UseVisualStyleBackColor = true;
 			this.checkBox_ch1_grfen.CheckedChanged += new System.EventHandler(this.checkBox_ch1_grfen_CheckedChanged);
 			// 
@@ -341,6 +355,7 @@
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.textBox_ch2_name);
 			this.groupBox2.Controls.Add(this.checkBox_ch2_grfen);
 			this.groupBox2.Controls.Add(this.label4);
 			this.groupBox2.Controls.Add(this.textBox_ch2);
@@ -351,16 +366,24 @@
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "CH2";
 			// 
+			// textBox_ch2_name
+			// 
+			this.textBox_ch2_name.Location = new System.Drawing.Point(5, 17);
+			this.textBox_ch2_name.Name = "textBox_ch2_name";
+			this.textBox_ch2_name.Size = new System.Drawing.Size(129, 19);
+			this.textBox_ch2_name.TabIndex = 5;
+			this.textBox_ch2_name.Text = "CH2_NAME";
+			// 
 			// checkBox_ch2_grfen
 			// 
 			this.checkBox_ch2_grfen.AutoSize = true;
 			this.checkBox_ch2_grfen.Checked = true;
 			this.checkBox_ch2_grfen.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox_ch2_grfen.Location = new System.Drawing.Point(6, 18);
+			this.checkBox_ch2_grfen.Location = new System.Drawing.Point(140, 20);
 			this.checkBox_ch2_grfen.Name = "checkBox_ch2_grfen";
-			this.checkBox_ch2_grfen.Size = new System.Drawing.Size(73, 16);
+			this.checkBox_ch2_grfen.Size = new System.Drawing.Size(40, 16);
 			this.checkBox_ch2_grfen.TabIndex = 4;
-			this.checkBox_ch2_grfen.Text = "グラフ表示";
+			this.checkBox_ch2_grfen.Text = "GV";
 			this.checkBox_ch2_grfen.UseVisualStyleBackColor = true;
 			this.checkBox_ch2_grfen.CheckedChanged += new System.EventHandler(this.checkBox_ch2_grfen_CheckedChanged);
 			// 
@@ -385,6 +408,7 @@
 			// 
 			// groupBox3
 			// 
+			this.groupBox3.Controls.Add(this.textBox_ch3_name);
 			this.groupBox3.Controls.Add(this.checkBox_ch3_grfen);
 			this.groupBox3.Controls.Add(this.label5);
 			this.groupBox3.Controls.Add(this.textBox_ch3);
@@ -395,16 +419,24 @@
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "CH3";
 			// 
+			// textBox_ch3_name
+			// 
+			this.textBox_ch3_name.Location = new System.Drawing.Point(5, 18);
+			this.textBox_ch3_name.Name = "textBox_ch3_name";
+			this.textBox_ch3_name.Size = new System.Drawing.Size(129, 19);
+			this.textBox_ch3_name.TabIndex = 5;
+			this.textBox_ch3_name.Text = "CH3_NAME";
+			// 
 			// checkBox_ch3_grfen
 			// 
 			this.checkBox_ch3_grfen.AutoSize = true;
 			this.checkBox_ch3_grfen.Checked = true;
 			this.checkBox_ch3_grfen.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox_ch3_grfen.Location = new System.Drawing.Point(6, 18);
+			this.checkBox_ch3_grfen.Location = new System.Drawing.Point(142, 20);
 			this.checkBox_ch3_grfen.Name = "checkBox_ch3_grfen";
-			this.checkBox_ch3_grfen.Size = new System.Drawing.Size(73, 16);
+			this.checkBox_ch3_grfen.Size = new System.Drawing.Size(40, 16);
 			this.checkBox_ch3_grfen.TabIndex = 4;
-			this.checkBox_ch3_grfen.Text = "グラフ表示";
+			this.checkBox_ch3_grfen.Text = "GV";
 			this.checkBox_ch3_grfen.UseVisualStyleBackColor = true;
 			this.checkBox_ch3_grfen.CheckedChanged += new System.EventHandler(this.checkBox_ch3_grfen_CheckedChanged);
 			// 
@@ -429,6 +461,7 @@
 			// 
 			// groupBox4
 			// 
+			this.groupBox4.Controls.Add(this.textBox_ch4_name);
 			this.groupBox4.Controls.Add(this.checkBox_ch4_grfen);
 			this.groupBox4.Controls.Add(this.label6);
 			this.groupBox4.Controls.Add(this.textBox_ch4);
@@ -439,16 +472,24 @@
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "CH4";
 			// 
+			// textBox_ch4_name
+			// 
+			this.textBox_ch4_name.Location = new System.Drawing.Point(5, 19);
+			this.textBox_ch4_name.Name = "textBox_ch4_name";
+			this.textBox_ch4_name.Size = new System.Drawing.Size(129, 19);
+			this.textBox_ch4_name.TabIndex = 5;
+			this.textBox_ch4_name.Text = "CH4_NAME";
+			// 
 			// checkBox_ch4_grfen
 			// 
 			this.checkBox_ch4_grfen.AutoSize = true;
 			this.checkBox_ch4_grfen.Checked = true;
 			this.checkBox_ch4_grfen.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox_ch4_grfen.Location = new System.Drawing.Point(6, 18);
+			this.checkBox_ch4_grfen.Location = new System.Drawing.Point(138, 21);
 			this.checkBox_ch4_grfen.Name = "checkBox_ch4_grfen";
-			this.checkBox_ch4_grfen.Size = new System.Drawing.Size(73, 16);
+			this.checkBox_ch4_grfen.Size = new System.Drawing.Size(40, 16);
 			this.checkBox_ch4_grfen.TabIndex = 4;
-			this.checkBox_ch4_grfen.Text = "グラフ表示";
+			this.checkBox_ch4_grfen.Text = "GV";
 			this.checkBox_ch4_grfen.UseVisualStyleBackColor = true;
 			this.checkBox_ch4_grfen.CheckedChanged += new System.EventHandler(this.checkBox_ch4_grfen_CheckedChanged);
 			// 
@@ -485,9 +526,9 @@
 			// richTextBox_log
 			// 
 			this.richTextBox_log.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.richTextBox_log.Location = new System.Drawing.Point(101, 661);
+			this.richTextBox_log.Location = new System.Drawing.Point(111, 661);
 			this.richTextBox_log.Name = "richTextBox_log";
-			this.richTextBox_log.Size = new System.Drawing.Size(926, 62);
+			this.richTextBox_log.Size = new System.Drawing.Size(916, 70);
 			this.richTextBox_log.TabIndex = 8;
 			this.richTextBox_log.Text = "";
 			// 
@@ -495,12 +536,15 @@
 			// 
 			this.checkBox_LogEn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkBox_LogEn.AutoSize = true;
-			this.checkBox_LogEn.Location = new System.Drawing.Point(15, 662);
+			this.checkBox_LogEn.Checked = true;
+			this.checkBox_LogEn.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox_LogEn.Location = new System.Drawing.Point(11, 663);
 			this.checkBox_LogEn.Name = "checkBox_LogEn";
 			this.checkBox_LogEn.Size = new System.Drawing.Size(80, 16);
 			this.checkBox_LogEn.TabIndex = 9;
 			this.checkBox_LogEn.Text = "Log Enable";
 			this.checkBox_LogEn.UseVisualStyleBackColor = true;
+			this.checkBox_LogEn.CheckedChanged += new System.EventHandler(this.checkBox_LogEn_CheckedChanged);
 			// 
 			// comboBox_COM_Port
 			// 
@@ -510,12 +554,27 @@
 			this.comboBox_COM_Port.Size = new System.Drawing.Size(71, 20);
 			this.comboBox_COM_Port.TabIndex = 10;
 			// 
+			// checkBox_time_stamp
+			// 
+			this.checkBox_time_stamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkBox_time_stamp.AutoSize = true;
+			this.checkBox_time_stamp.Checked = true;
+			this.checkBox_time_stamp.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox_time_stamp.Enabled = false;
+			this.checkBox_time_stamp.Location = new System.Drawing.Point(11, 685);
+			this.checkBox_time_stamp.Name = "checkBox_time_stamp";
+			this.checkBox_time_stamp.Size = new System.Drawing.Size(85, 16);
+			this.checkBox_time_stamp.TabIndex = 9;
+			this.checkBox_time_stamp.Text = "Time Stamp";
+			this.checkBox_time_stamp.UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1034, 735);
 			this.Controls.Add(this.comboBox_COM_Port);
+			this.Controls.Add(this.checkBox_time_stamp);
 			this.Controls.Add(this.checkBox_LogEn);
 			this.Controls.Add(this.richTextBox_log);
 			this.Controls.Add(this.groupBox4);
@@ -589,6 +648,11 @@
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.ComboBox comboBox_COM_Port;
+		private System.Windows.Forms.TextBox textBox_ch1_name;
+		private System.Windows.Forms.TextBox textBox_ch2_name;
+		private System.Windows.Forms.TextBox textBox_ch3_name;
+		private System.Windows.Forms.TextBox textBox_ch4_name;
+		private System.Windows.Forms.CheckBox checkBox_time_stamp;
 	}
 }
 
