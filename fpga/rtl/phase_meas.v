@@ -1,5 +1,6 @@
 module phase_meas (
-    input   wire            i_res_n,
+    input   wire            i_res_250m_n,
+    input   wire            i_res_50m_n,
     input   wire            i_fclk,     // 500MHz
     input   wire            i_pclk,     // 250MHz
     input   wire            i_lclk,     // 50MHz
@@ -24,16 +25,16 @@ module phase_meas (
     // Output rate = 1GHz / 4 = 250MHz
     wire [19:0] w_dt20b;
     lvds lvds_inst (
-		.rx_inclock ( i_fclk ),
-		.rx_in ( {i_pps5, i_pps4, i_pps3, i_pps2, i_pps1} ),
-		.rx_out ( w_dt20b[19:0] )
-	);
+        .rx_inclock ( i_fclk ),
+        .rx_in ( {i_pps5, i_pps4, i_pps3, i_pps2, i_pps1} ),
+        .rx_out ( w_dt20b[19:0] )
+    );
 
 
     // Phase counter
     reg     [27:0]  r_cnt;
-    always @(posedge i_pclk or negedge i_res_n) begin
-        if (~i_res_n) begin
+    always @(posedge i_pclk or negedge i_res_250m_n) begin
+        if (~i_res_250m_n) begin
             r_cnt[27:0] <= 28'd0;
         end else begin
             r_cnt[27:0] <= r_cnt[27:0] + 28'd1;
@@ -62,8 +63,8 @@ module phase_meas (
     reg             r_pd_pps5_b;
     reg             r_pd_pps5_c;
     reg             r_pd_pps5_d;
-    always @(posedge i_pclk or negedge i_res_n) begin
-        if (~i_res_n) begin
+    always @(posedge i_pclk or negedge i_res_250m_n) begin
+        if (~i_res_250m_n) begin
             r_dt20b_ff1[19:0] <= 20'd0;
             r_pd_pps1_a <= 1'b0;
             r_pd_pps1_b <= 1'b0;
@@ -137,8 +138,8 @@ module phase_meas (
     reg     [27:0]  r_cap_pps5_b;
     reg     [27:0]  r_cap_pps5_c;
     reg     [27:0]  r_cap_pps5_d;
-    always @(posedge i_pclk or negedge i_res_n) begin
-        if (~i_res_n) begin
+    always @(posedge i_pclk or negedge i_res_250m_n) begin
+        if (~i_res_250m_n) begin
             r_cap_pps1_a[27:0] <= 28'd0;
             r_cap_pps1_b[27:0] <= 28'd0;
             r_cap_pps1_c[27:0] <= 28'd0;
@@ -197,8 +198,8 @@ module phase_meas (
     // PPS1立ち上がりエッジ検出
     reg     [2:0]   r_pps1_ff_50m;
     wire            w_pps1_posedge_50m = (r_pps1_ff_50m[2:1] == 2'b01);    
-    always @(posedge i_lclk or negedge i_res_n) begin
-        if (~i_res_n) begin
+    always @(posedge i_lclk or negedge i_res_50m_n) begin
+        if (~i_res_50m_n) begin
             r_pps1_ff_50m[2:0] <= 3'd0;
         end else begin
             //r_pps1_ff_50m[2:0] <= {r_pps1_ff_50m[1:0], i_pps1};
@@ -209,8 +210,8 @@ module phase_meas (
     // ディレイ追加
     reg     [25:0]  r_dly_cnt_50m;
     reg             r_dly_st1_50m;
-    always @(posedge i_lclk or negedge i_res_n) begin
-        if (~i_res_n) begin
+    always @(posedge i_lclk or negedge i_res_50m_n) begin
+        if (~i_res_50m_n) begin
             r_dly_cnt_50m[25:0] <= 26'h3FFFFFF;
             r_dly_st1_50m <= 1'b0;
         end else if (w_pps1_posedge_50m) begin
@@ -228,8 +229,8 @@ module phase_meas (
     reg     [29:0]  r_cnt_sum_pps3;
     reg     [29:0]  r_cnt_sum_pps4;
     reg     [29:0]  r_cnt_sum_pps5;
-    always @(posedge i_lclk or negedge i_res_n) begin
-        if (~i_res_n) begin
+    always @(posedge i_lclk or negedge i_res_50m_n) begin
+        if (~i_res_50m_n) begin
             r_cnt_sum_pps1[29:0] <= 30'd0;
             r_cnt_sum_pps2[29:0] <= 30'd0;
             r_cnt_sum_pps3[29:0] <= 30'd0;
@@ -246,8 +247,8 @@ module phase_meas (
 
     // 1CLK遅延信号生成
     reg             r_dly_st2_50m;
-    always @(posedge i_lclk or negedge i_res_n) begin
-        if (~i_res_n) begin
+    always @(posedge i_lclk or negedge i_res_50m_n) begin
+        if (~i_res_50m_n) begin
             r_dly_st2_50m <= 1'b0;
         end else begin
             r_dly_st2_50m <= r_dly_st1_50m;
@@ -255,8 +256,8 @@ module phase_meas (
     end
 
     // 載せ替え
-    always @(posedge i_lclk or negedge i_res_n) begin
-        if (~i_res_n) begin
+    always @(posedge i_lclk or negedge i_res_50m_n) begin
+        if (~i_res_50m_n) begin
             o_ph_en <= 1'b0;
             o_ph1[29:0] <= 30'd0;
             o_ph2[29:0] <= 30'd0;

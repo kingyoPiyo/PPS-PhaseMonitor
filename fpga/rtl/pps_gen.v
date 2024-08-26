@@ -1,9 +1,10 @@
 // PPS信号(T = 1000ms, PW = 100ms)を生成する
 
 module pps_gen (
-    input   wire    i_clk,      // 100MHz
+    input   wire    i_clk,          // 100MHz
     input   wire    i_res_n,
-    input   wire    i_ph_sync,  // sync to pos edge
+    input   wire    i_ph_sync_sig,  // sync to pos edge
+    input   wire    i_ph_sync_en,   // sync enable
     output  reg     o_pps
     );
 
@@ -13,12 +14,12 @@ module pps_gen (
 
     // 同期信号立ち上がりエッジ検出
     reg     [2:0]   r_sync_ff;
-    wire            w_sync_en = (r_sync_ff[2:1] == 2'b01);
+    wire            w_sync_en = (r_sync_ff[2:1] == 2'b01) & i_ph_sync_en;
     always @(posedge i_clk or negedge i_res_n) begin
         if (~i_res_n) begin
             r_sync_ff[2:0] <= 3'd0;
         end else begin
-            r_sync_ff[2:0] <= {r_sync_ff[1:0], i_ph_sync};
+            r_sync_ff[2:0] <= {r_sync_ff[1:0], i_ph_sync_sig};
         end
     end
 

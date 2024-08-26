@@ -142,6 +142,7 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_LED[3]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_LED[2]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_LED[1]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to PANEL_LED[0]
+set_global_assignment -name VERILOG_FILE rtl/uart_cmd_proc.v
 set_global_assignment -name VERILOG_FILE rtl/uart_rx.v
 set_global_assignment -name VERILOG_FILE rtl/reset_gen.v
 set_global_assignment -name VERILOG_FILE rtl/freq_counter.v

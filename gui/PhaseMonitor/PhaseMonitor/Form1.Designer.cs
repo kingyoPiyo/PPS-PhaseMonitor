@@ -81,6 +81,7 @@
 			this.checkBox_LogEn = new System.Windows.Forms.CheckBox();
 			this.comboBox_COM_Port = new System.Windows.Forms.ComboBox();
 			this.checkBox_time_stamp = new System.Windows.Forms.CheckBox();
+			this.button_re_sync = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.groupBox5.SuspendLayout();
@@ -515,9 +516,9 @@
 			// button_clear
 			// 
 			this.button_clear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-			this.button_clear.Location = new System.Drawing.Point(681, 5);
+			this.button_clear.Location = new System.Drawing.Point(649, 7);
 			this.button_clear.Name = "button_clear";
-			this.button_clear.Size = new System.Drawing.Size(100, 33);
+			this.button_clear.Size = new System.Drawing.Size(79, 33);
 			this.button_clear.TabIndex = 1;
 			this.button_clear.Text = "ALL CLEAR";
 			this.button_clear.UseVisualStyleBackColor = false;
@@ -568,6 +569,17 @@
 			this.checkBox_time_stamp.Text = "Time Stamp";
 			this.checkBox_time_stamp.UseVisualStyleBackColor = true;
 			// 
+			// button_re_sync
+			// 
+			this.button_re_sync.BackColor = System.Drawing.Color.Lime;
+			this.button_re_sync.Location = new System.Drawing.Point(732, 7);
+			this.button_re_sync.Name = "button_re_sync";
+			this.button_re_sync.Size = new System.Drawing.Size(49, 33);
+			this.button_re_sync.TabIndex = 1;
+			this.button_re_sync.Text = "SYNC";
+			this.button_re_sync.UseVisualStyleBackColor = false;
+			this.button_re_sync.Click += new System.EventHandler(this.button_re_sync_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -585,6 +597,7 @@
 			this.Controls.Add(this.label_pps);
 			this.Controls.Add(this.textBox_RxData);
 			this.Controls.Add(this.label1);
+			this.Controls.Add(this.button_re_sync);
 			this.Controls.Add(this.button_clear);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.groupBox5);
@@ -653,6 +666,7 @@
 		private System.Windows.Forms.TextBox textBox_ch3_name;
 		private System.Windows.Forms.TextBox textBox_ch4_name;
 		private System.Windows.Forms.CheckBox checkBox_time_stamp;
+		private System.Windows.Forms.Button button_re_sync;
 	}
 }
 

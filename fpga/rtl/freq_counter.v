@@ -34,7 +34,7 @@ module freq_counter (
 
 
     // phase_meas の o_ph_en を参照してラッチされるため
-    // 100MHz -> 50MHz のクロック載せ替えは省略
+    // 100MHz -> 50MHz のクロック載せ替えは省略(不要)
     assign o_freq[27:0] = r_freq[27:0];
 
 endmodule

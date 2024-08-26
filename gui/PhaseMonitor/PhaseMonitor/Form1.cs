@@ -308,5 +308,14 @@ namespace PhaseMonitor
 		{
 			checkBox_time_stamp.Enabled = !checkBox_LogEn.Checked;
 		}
+
+
+		private void button_re_sync_Click(object sender, EventArgs e)
+		{
+			if (serialPort1.IsOpen)
+			{
+				serialPort1.Write("sc\n");
+			}
+		}
 	}
 }
