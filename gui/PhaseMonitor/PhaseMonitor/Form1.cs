@@ -28,12 +28,6 @@ namespace PhaseMonitor
 		{
 			InitializeComponent();
 
-
-			// 設定読み出し
-			//DataMod dt = new DataMod();
-			//dt.LogSave();
-			//dt.LogLoad();
-
 			scanCOMPorts();
 
 			// チャート初期化
@@ -61,9 +55,9 @@ namespace PhaseMonitor
 
 
 
-		//Button1のClickイベントハンドラ
-		//データ受信の待機を開始する
-		private void Button1_Click(object sender, EventArgs e)
+		// SerialPortOpenCloseのClickイベントハンドラ
+		// データ受信の待機を開始する
+		private void Button_SerialPortOpenClose_Click(object sender, EventArgs e)
 		{
 			if (isCOM_Open == false)
 			{
@@ -77,13 +71,13 @@ namespace PhaseMonitor
 					serialPort1.PortName = comboBox_COM_Port.Text;
 					serialPort1.Open();
 
-					button1.Text = "Close";
+					button_SerialPortOpenClose.Text = "Close";
 					comboBox_COM_Port.Enabled = false;
 					isCOM_Open = true;
 				}
 				catch
 				{
-					button1.Text = "Open";
+					button_SerialPortOpenClose.Text = "Open";
 					comboBox_COM_Port.Enabled = true;
 					try
 					{
@@ -97,7 +91,7 @@ namespace PhaseMonitor
 			}
 			else
 			{
-				button1.Text = "Open";
+				button_SerialPortOpenClose.Text = "Open";
 				comboBox_COM_Port.Enabled = true;
 				try
 				{
@@ -111,7 +105,7 @@ namespace PhaseMonitor
 		}
 
 
-		//RichTextBox1にメッセージを表示する
+		// richTextBox_logにメッセージを表示する
 		private void ShowReceivedString(string str)
 		{
 			textBox_RxData.Text = str;
@@ -215,9 +209,7 @@ namespace PhaseMonitor
 			try
 			{
 				rcv_data = serialPort1.ReadLine();
-				Console.WriteLine(rcv_data);
 				rxCnt++;
-
 
 				textBox_RxData.BeginInvoke(new Action<string>(ShowReceivedString), rcv_data);
 

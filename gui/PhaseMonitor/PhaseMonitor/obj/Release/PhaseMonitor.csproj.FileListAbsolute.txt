@@ -1,0 +1,9 @@
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\bin\Release\PhaseMonitor.exe.config
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\bin\Release\PhaseMonitor.exe
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\bin\Release\PhaseMonitor.pdb
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Release\PhaseMonitor.Form1.resources
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Release\PhaseMonitor.Properties.Resources.resources
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Release\PhaseMonitor.csproj.GenerateResource.cache
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Release\PhaseMonitor.csproj.CoreCompileInputs.cache
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Release\PhaseMonitor.exe
+D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Release\PhaseMonitor.pdb

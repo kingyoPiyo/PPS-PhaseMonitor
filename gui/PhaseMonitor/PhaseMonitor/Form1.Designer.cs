@@ -29,14 +29,14 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-			this.button1 = new System.Windows.Forms.Button();
+			this.button_SerialPortOpenClose = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.textBox_RxData = new System.Windows.Forms.TextBox();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -90,31 +90,31 @@
 			this.groupBox4.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// button1
+			// button_SerialPortOpenClose
 			// 
-			this.button1.Location = new System.Drawing.Point(145, 5);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 1;
-			this.button1.Text = "Open";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.Button1_Click);
+			this.button_SerialPortOpenClose.Location = new System.Drawing.Point(112, 4);
+			this.button_SerialPortOpenClose.Name = "button_SerialPortOpenClose";
+			this.button_SerialPortOpenClose.Size = new System.Drawing.Size(57, 23);
+			this.button_SerialPortOpenClose.TabIndex = 1;
+			this.button_SerialPortOpenClose.Text = "Open";
+			this.button_SerialPortOpenClose.UseVisualStyleBackColor = true;
+			this.button_SerialPortOpenClose.Click += new System.EventHandler(this.Button_SerialPortOpenClose_Click);
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(9, 12);
+			this.label1.Location = new System.Drawing.Point(5, 11);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(53, 12);
+			this.label1.Size = new System.Drawing.Size(26, 12);
 			this.label1.TabIndex = 2;
-			this.label1.Text = "Port Num";
+			this.label1.Text = "Port";
 			// 
 			// textBox_RxData
 			// 
 			this.textBox_RxData.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.textBox_RxData.Location = new System.Drawing.Point(226, 7);
+			this.textBox_RxData.Location = new System.Drawing.Point(175, 7);
 			this.textBox_RxData.Name = "textBox_RxData";
-			this.textBox_RxData.Size = new System.Drawing.Size(331, 19);
+			this.textBox_RxData.Size = new System.Drawing.Size(393, 19);
 			this.textBox_RxData.TabIndex = 3;
 			// 
 			// notifyIcon1
@@ -142,35 +142,35 @@
 			this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			chartArea2.AxisX.Title = "Time [s]";
-			chartArea2.AxisY.Title = "Phase Error [ns]";
-			chartArea2.Name = "ChartArea1";
-			this.chart1.ChartAreas.Add(chartArea2);
-			legend2.Name = "Legend1";
-			this.chart1.Legends.Add(legend2);
+			chartArea6.AxisX.Title = "Time [s]";
+			chartArea6.AxisY.Title = "Phase Error [ns]";
+			chartArea6.Name = "ChartArea1";
+			this.chart1.ChartAreas.Add(chartArea6);
+			legend6.Name = "Legend1";
+			this.chart1.Legends.Add(legend6);
 			this.chart1.Location = new System.Drawing.Point(12, 141);
 			this.chart1.Name = "chart1";
-			series5.ChartArea = "ChartArea1";
-			series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series5.Legend = "Legend1";
-			series5.Name = "CH1";
-			series6.ChartArea = "ChartArea1";
-			series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series6.Legend = "Legend1";
-			series6.Name = "CH2";
-			series7.ChartArea = "ChartArea1";
-			series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series7.Legend = "Legend1";
-			series7.Name = "CH3";
-			series8.ChartArea = "ChartArea1";
-			series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series8.Legend = "Legend1";
-			series8.Name = "CH4";
-			this.chart1.Series.Add(series5);
-			this.chart1.Series.Add(series6);
-			this.chart1.Series.Add(series7);
-			this.chart1.Series.Add(series8);
-			this.chart1.Size = new System.Drawing.Size(1015, 514);
+			series21.ChartArea = "ChartArea1";
+			series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series21.Legend = "Legend1";
+			series21.Name = "CH1";
+			series22.ChartArea = "ChartArea1";
+			series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series22.Legend = "Legend1";
+			series22.Name = "CH2";
+			series23.ChartArea = "ChartArea1";
+			series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series23.Legend = "Legend1";
+			series23.Name = "CH3";
+			series24.ChartArea = "ChartArea1";
+			series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series24.Legend = "Legend1";
+			series24.Name = "CH4";
+			this.chart1.Series.Add(series21);
+			this.chart1.Series.Add(series22);
+			this.chart1.Series.Add(series23);
+			this.chart1.Series.Add(series24);
+			this.chart1.Size = new System.Drawing.Size(995, 403);
 			this.chart1.TabIndex = 5;
 			this.chart1.Text = "chart1";
 			// 
@@ -192,7 +192,7 @@
 			// label_pps
 			// 
 			this.label_pps.AutoSize = true;
-			this.label_pps.Location = new System.Drawing.Point(563, 12);
+			this.label_pps.Location = new System.Drawing.Point(579, 10);
 			this.label_pps.Name = "label_pps";
 			this.label_pps.Size = new System.Drawing.Size(80, 12);
 			this.label_pps.TabIndex = 4;
@@ -213,7 +213,7 @@
 			this.groupBox1.Controls.Add(this.checkBox_ch1_grfen);
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Controls.Add(this.textBox_ch1);
-			this.groupBox1.Location = new System.Drawing.Point(15, 46);
+			this.groupBox1.Location = new System.Drawing.Point(6, 46);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(187, 89);
 			this.groupBox1.TabIndex = 6;
@@ -233,7 +233,7 @@
 			this.checkBox_ch1_grfen.AutoSize = true;
 			this.checkBox_ch1_grfen.Checked = true;
 			this.checkBox_ch1_grfen.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox_ch1_grfen.Location = new System.Drawing.Point(141, 20);
+			this.checkBox_ch1_grfen.Location = new System.Drawing.Point(137, 20);
 			this.checkBox_ch1_grfen.Name = "checkBox_ch1_grfen";
 			this.checkBox_ch1_grfen.Size = new System.Drawing.Size(40, 16);
 			this.checkBox_ch1_grfen.TabIndex = 4;
@@ -245,7 +245,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("MS UI Gothic", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.label2.Location = new System.Drawing.Point(137, 48);
+			this.label2.Location = new System.Drawing.Point(139, 48);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(41, 29);
 			this.label2.TabIndex = 2;
@@ -264,7 +264,7 @@
 			this.groupBox5.Controls.Add(this.label11);
 			this.groupBox5.Controls.Add(this.label8);
 			this.groupBox5.Controls.Add(this.label7);
-			this.groupBox5.Location = new System.Drawing.Point(787, 5);
+			this.groupBox5.Location = new System.Drawing.Point(767, 5);
 			this.groupBox5.Name = "groupBox5";
 			this.groupBox5.Size = new System.Drawing.Size(240, 130);
 			this.groupBox5.TabIndex = 7;
@@ -360,7 +360,7 @@
 			this.groupBox2.Controls.Add(this.checkBox_ch2_grfen);
 			this.groupBox2.Controls.Add(this.label4);
 			this.groupBox2.Controls.Add(this.textBox_ch2);
-			this.groupBox2.Location = new System.Drawing.Point(208, 46);
+			this.groupBox2.Location = new System.Drawing.Point(196, 46);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(187, 89);
 			this.groupBox2.TabIndex = 6;
@@ -380,7 +380,7 @@
 			this.checkBox_ch2_grfen.AutoSize = true;
 			this.checkBox_ch2_grfen.Checked = true;
 			this.checkBox_ch2_grfen.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox_ch2_grfen.Location = new System.Drawing.Point(140, 20);
+			this.checkBox_ch2_grfen.Location = new System.Drawing.Point(137, 19);
 			this.checkBox_ch2_grfen.Name = "checkBox_ch2_grfen";
 			this.checkBox_ch2_grfen.Size = new System.Drawing.Size(40, 16);
 			this.checkBox_ch2_grfen.TabIndex = 4;
@@ -413,7 +413,7 @@
 			this.groupBox3.Controls.Add(this.checkBox_ch3_grfen);
 			this.groupBox3.Controls.Add(this.label5);
 			this.groupBox3.Controls.Add(this.textBox_ch3);
-			this.groupBox3.Location = new System.Drawing.Point(401, 46);
+			this.groupBox3.Location = new System.Drawing.Point(386, 46);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Size = new System.Drawing.Size(187, 89);
 			this.groupBox3.TabIndex = 6;
@@ -433,7 +433,7 @@
 			this.checkBox_ch3_grfen.AutoSize = true;
 			this.checkBox_ch3_grfen.Checked = true;
 			this.checkBox_ch3_grfen.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox_ch3_grfen.Location = new System.Drawing.Point(142, 20);
+			this.checkBox_ch3_grfen.Location = new System.Drawing.Point(138, 20);
 			this.checkBox_ch3_grfen.Name = "checkBox_ch3_grfen";
 			this.checkBox_ch3_grfen.Size = new System.Drawing.Size(40, 16);
 			this.checkBox_ch3_grfen.TabIndex = 4;
@@ -466,7 +466,7 @@
 			this.groupBox4.Controls.Add(this.checkBox_ch4_grfen);
 			this.groupBox4.Controls.Add(this.label6);
 			this.groupBox4.Controls.Add(this.textBox_ch4);
-			this.groupBox4.Location = new System.Drawing.Point(594, 46);
+			this.groupBox4.Location = new System.Drawing.Point(576, 46);
 			this.groupBox4.Name = "groupBox4";
 			this.groupBox4.Size = new System.Drawing.Size(187, 89);
 			this.groupBox4.TabIndex = 6;
@@ -486,7 +486,7 @@
 			this.checkBox_ch4_grfen.AutoSize = true;
 			this.checkBox_ch4_grfen.Checked = true;
 			this.checkBox_ch4_grfen.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox_ch4_grfen.Location = new System.Drawing.Point(138, 21);
+			this.checkBox_ch4_grfen.Location = new System.Drawing.Point(137, 21);
 			this.checkBox_ch4_grfen.Name = "checkBox_ch4_grfen";
 			this.checkBox_ch4_grfen.Size = new System.Drawing.Size(40, 16);
 			this.checkBox_ch4_grfen.TabIndex = 4;
@@ -516,20 +516,20 @@
 			// button_clear
 			// 
 			this.button_clear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-			this.button_clear.Location = new System.Drawing.Point(649, 7);
+			this.button_clear.Location = new System.Drawing.Point(664, 4);
 			this.button_clear.Name = "button_clear";
-			this.button_clear.Size = new System.Drawing.Size(79, 33);
+			this.button_clear.Size = new System.Drawing.Size(46, 23);
 			this.button_clear.TabIndex = 1;
-			this.button_clear.Text = "ALL CLEAR";
+			this.button_clear.Text = "A.C.";
 			this.button_clear.UseVisualStyleBackColor = false;
 			this.button_clear.Click += new System.EventHandler(this.button_clear_Click);
 			// 
 			// richTextBox_log
 			// 
 			this.richTextBox_log.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.richTextBox_log.Location = new System.Drawing.Point(111, 661);
+			this.richTextBox_log.Location = new System.Drawing.Point(111, 550);
 			this.richTextBox_log.Name = "richTextBox_log";
-			this.richTextBox_log.Size = new System.Drawing.Size(916, 70);
+			this.richTextBox_log.Size = new System.Drawing.Size(896, 69);
 			this.richTextBox_log.TabIndex = 8;
 			this.richTextBox_log.Text = "";
 			// 
@@ -539,7 +539,7 @@
 			this.checkBox_LogEn.AutoSize = true;
 			this.checkBox_LogEn.Checked = true;
 			this.checkBox_LogEn.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox_LogEn.Location = new System.Drawing.Point(11, 663);
+			this.checkBox_LogEn.Location = new System.Drawing.Point(11, 552);
 			this.checkBox_LogEn.Name = "checkBox_LogEn";
 			this.checkBox_LogEn.Size = new System.Drawing.Size(80, 16);
 			this.checkBox_LogEn.TabIndex = 9;
@@ -550,9 +550,9 @@
 			// comboBox_COM_Port
 			// 
 			this.comboBox_COM_Port.FormattingEnabled = true;
-			this.comboBox_COM_Port.Location = new System.Drawing.Point(67, 7);
+			this.comboBox_COM_Port.Location = new System.Drawing.Point(37, 6);
 			this.comboBox_COM_Port.Name = "comboBox_COM_Port";
-			this.comboBox_COM_Port.Size = new System.Drawing.Size(71, 20);
+			this.comboBox_COM_Port.Size = new System.Drawing.Size(69, 20);
 			this.comboBox_COM_Port.TabIndex = 10;
 			// 
 			// checkBox_time_stamp
@@ -562,7 +562,7 @@
 			this.checkBox_time_stamp.Checked = true;
 			this.checkBox_time_stamp.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.checkBox_time_stamp.Enabled = false;
-			this.checkBox_time_stamp.Location = new System.Drawing.Point(11, 685);
+			this.checkBox_time_stamp.Location = new System.Drawing.Point(11, 574);
 			this.checkBox_time_stamp.Name = "checkBox_time_stamp";
 			this.checkBox_time_stamp.Size = new System.Drawing.Size(85, 16);
 			this.checkBox_time_stamp.TabIndex = 9;
@@ -572,9 +572,9 @@
 			// button_re_sync
 			// 
 			this.button_re_sync.BackColor = System.Drawing.Color.Lime;
-			this.button_re_sync.Location = new System.Drawing.Point(732, 7);
+			this.button_re_sync.Location = new System.Drawing.Point(712, 4);
 			this.button_re_sync.Name = "button_re_sync";
-			this.button_re_sync.Size = new System.Drawing.Size(49, 33);
+			this.button_re_sync.Size = new System.Drawing.Size(49, 23);
 			this.button_re_sync.TabIndex = 1;
 			this.button_re_sync.Text = "SYNC";
 			this.button_re_sync.UseVisualStyleBackColor = false;
@@ -584,7 +584,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1034, 735);
+			this.ClientSize = new System.Drawing.Size(1014, 624);
 			this.Controls.Add(this.comboBox_COM_Port);
 			this.Controls.Add(this.checkBox_time_stamp);
 			this.Controls.Add(this.checkBox_LogEn);
@@ -599,8 +599,9 @@
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.button_re_sync);
 			this.Controls.Add(this.button_clear);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.button_SerialPortOpenClose);
 			this.Controls.Add(this.groupBox5);
+			this.MinimumSize = new System.Drawing.Size(1030, 500);
 			this.Name = "Form1";
 			this.Text = "4CH Phase Monitor";
 			((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
@@ -621,7 +622,7 @@
 
 		#endregion
 		private System.ComponentModel.BackgroundWorker backgroundWorker1;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button button_SerialPortOpenClose;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox textBox_RxData;
 		private System.Windows.Forms.NotifyIcon notifyIcon1;
