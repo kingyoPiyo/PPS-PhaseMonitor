@@ -17,4 +17,3 @@ D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\Pha
 D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.csproj.CoreCompileInputs.cache
 D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.exe
 D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.pdb
-D:\documents\GitHub\PPS-PhaseMonitor\gui\PhaseMonitor\PhaseMonitor\obj\Debug\PhaseMonitor.csproj.AssemblyReference.cache

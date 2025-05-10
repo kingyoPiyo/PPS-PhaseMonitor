@@ -309,5 +309,81 @@ namespace PhaseMonitor
 				serialPort1.Write("sc\n");
 			}
 		}
+
+
+		////////// グラフのY軸をクリップする
+		private void checkBox_Yclip_CheckedChanged(object sender, EventArgs e)
+		{
+			if(checkBox_Yclip.Checked)
+			{
+				chart1.ChartAreas[0].AxisY.Maximum = (double)numericUpDown_Yclip_max.Value;
+				chart1.ChartAreas[0].AxisY.Minimum = (double)numericUpDown_Yclip_min.Value;
+			} else
+			{
+				chart1.ChartAreas[0].AxisY.Maximum = Double.NaN;
+				chart1.ChartAreas[0].AxisY.Minimum = Double.NaN;
+				chart1.ChartAreas[0].RecalculateAxesScale();
+			}
+		}
+		private void numericUpDown_Yclip_max_ValueChanged(object sender, EventArgs e)
+		{
+			if (numericUpDown_Yclip_max.Value <= numericUpDown_Yclip_min.Value)
+			{
+				numericUpDown_Yclip_min.Value = numericUpDown_Yclip_max.Value - 1;
+			}
+			if (checkBox_Yclip.Checked)
+			{
+				chart1.ChartAreas[0].AxisY.Maximum = (double)numericUpDown_Yclip_max.Value;
+			}
+		}
+		private void numericUpDown_Yclip_min_ValueChanged(object sender, EventArgs e)
+		{
+			if (numericUpDown_Yclip_max.Value <= numericUpDown_Yclip_min.Value)
+			{
+				numericUpDown_Yclip_max.Value = numericUpDown_Yclip_max.Value + 1;
+			}
+			if (checkBox_Yclip.Checked)
+			{
+				chart1.ChartAreas[0].AxisY.Minimum = (double)numericUpDown_Yclip_min.Value;
+			}
+		}
+
+		////////// グラフのX軸をクリップする
+		private void checkBox_Xclip_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBox_Xclip.Checked)
+			{
+				chart1.ChartAreas[0].AxisX.Maximum = (double)numericUpDown_Xclip_max.Value;
+				chart1.ChartAreas[0].AxisX.Minimum = (double)numericUpDown_Xclip_min.Value;
+			}
+			else
+			{
+				chart1.ChartAreas[0].AxisX.Maximum = Double.NaN;
+				chart1.ChartAreas[0].AxisX.Minimum = Double.NaN;
+				chart1.ChartAreas[0].RecalculateAxesScale();
+			}
+		}
+		private void numericUpDown_Xclip_max_ValueChanged(object sender, EventArgs e)
+		{
+			if (numericUpDown_Xclip_max.Value <= numericUpDown_Xclip_min.Value)
+			{
+				numericUpDown_Xclip_min.Value = numericUpDown_Xclip_max.Value - 1;
+			}
+			if (checkBox_Xclip.Checked)
+			{
+				chart1.ChartAreas[0].AxisX.Maximum = (double)numericUpDown_Xclip_max.Value;
+			}
+		}
+		private void numericUpDown_Xclip_min_ValueChanged(object sender, EventArgs e)
+		{
+			if (numericUpDown_Xclip_max.Value <= numericUpDown_Xclip_min.Value)
+			{
+				numericUpDown_Xclip_max.Value = numericUpDown_Xclip_max.Value + 1;
+			}
+			if (checkBox_Xclip.Checked)
+			{
+				chart1.ChartAreas[0].AxisX.Minimum = (double)numericUpDown_Xclip_min.Value;
+			}
+		}
 	}
 }
